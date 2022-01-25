@@ -3,7 +3,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
-//import * as s from "./styles/globalStyles";
+import * as s from "./styles/globalStyles.js";
 //import _color from "./assets/images/bg/_color.png";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
 
-  console.table(blockchain);
+  //console.table(blockchain);
 
   const mintNFT = (_account, _name) => {
     setLoading(true);
@@ -61,7 +61,14 @@ function App() {
   //   }
   // }, [blockchain.pixelToken]);
 
-  return <div></div>;
+  return (
+    <s.Screen style={{ backgroundColor: "pink" }}>
+      <s.Container ai={"center"} style={{ backgroundColor: "green" }}>
+        <s.TextTitle>Our Game</s.TextTitle>
+        <button>Connext</button>
+      </s.Container>
+    </s.Screen>
+  );
 }
 
 export default App;
