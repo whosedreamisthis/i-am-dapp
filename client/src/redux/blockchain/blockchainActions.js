@@ -57,7 +57,7 @@ export const connect = () => {
         if (pixelTokeNetworkdata) {
           const pixelToken = new web3.eth.Contract(
             PixelToken.abi,
-            "0x4d3e617fC5E6ee8873c5406E49860BF679cCbe33"
+            pixelTokeNetworkdata.address
           );
           dispatch(
             connectSuccess({

@@ -17,10 +17,11 @@ function App() {
   const mintNFT = (_account, _name) => {
     setLoading(true);
     blockchain.pixelToken.methods
-      .createRandomLip(_name)
+      .createRandomPixel(_name)
       .send({
         from: _account,
-        value: blockchain.web3.utils.toWei("0.01", "ether"),
+        gasPrice: "20000000",
+        value: blockchain.web3.utils.toWei("1", "ether"),
       })
       .once("error", (err) => {
         setLoading(false);
@@ -63,10 +64,33 @@ function App() {
 
   return (
     <s.Screen style={{ backgroundColor: "pink" }}>
-      <s.Container ai={"center"} style={{ backgroundColor: "green" }}>
-        <s.TextTitle>Our Game</s.TextTitle>
-        <button>Connext</button>
-      </s.Container>
+      {blockchain.account === "" || blockchain.lipToken === null ? (
+        <s.Container ai={"center"} style={{ backgroundColor: "green" }}>
+          <s.TextTitle>Our Game</s.TextTitle>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(connect());
+            }}
+          >
+            Connect
+          </button>
+        </s.Container>
+      ) : (
+        <s.Container ai={"center"} style={{ padding: "24px" }}>
+          <s.TextTitle>Welcome to the game</s.TextTitle>
+          <s.SpacerSmall />
+          <button
+            disabled={loading ? 1 : 0}
+            onClick={(e) => {
+              e.preventDefault();
+              mintNFT(blockchain.account, "Unknown");
+            }}
+          >
+            mint
+          </button>
+        </s.Container>
+      )}
     </s.Screen>
   );
 }

@@ -1,8 +1,9 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PixelToken is ERC721, Ownable {
@@ -56,6 +57,22 @@ contract PixelToken is ERC721, Ownable {
     // Getters
     function getPixels() public view returns (Pixel[] memory) {
         return pixels;
+    }
+
+    function getOwnerPixels(address _owner)
+        public
+        view
+        returns (Pixel[] memory)
+    {
+        Pixel[] memory result = new Pixel[](balanceOf(_owner));
+        uint256 counter = 0;
+        for (uint256 i = 0; i < pixels.length; i++) {
+            if (ownerOf(i) == _owner) {
+                result[counter] = pixels[i];
+                counter++;
+            }
+        }
+        return result;
     }
 
     function withdraw() external payable onlyOwner {
