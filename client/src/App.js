@@ -1,73 +1,67 @@
-import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import getWeb3 from "./getWeb3";
-
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { connect } from "./redux/blockchain/blockchainActions";
+import { fetchData } from "./redux/data/dataActions";
+//import * as s from "./styles/globalStyles";
+//import _color from "./assets/images/bg/_color.png";
 
-class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+function App() {
+  const dispatch = useDispatch();
+  const blockchain = useSelector((state) => state.blockchain);
+  const data = useSelector((state) => state.data);
+  const [loading, setLoading] = useState(false);
 
-  componentDidMount = async () => {
-    try {
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+  console.table(blockchain);
 
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
-
-      // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
-      );
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
-      console.error(error);
-    }
+  const mintNFT = (_account, _name) => {
+    setLoading(true);
+    blockchain.pixelToken.methods
+      .createRandomLip(_name)
+      .send({
+        from: _account,
+        value: blockchain.web3.utils.toWei("0.01", "ether"),
+      })
+      .once("error", (err) => {
+        setLoading(false);
+        console.log(err);
+      })
+      .then((receipt) => {
+        setLoading(false);
+        console.log(receipt);
+        dispatch(fetchData(blockchain.account));
+      });
   };
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    this.setState({ storageValue: response });
+  const levelUpLip = (_account, _id) => {
+    // setLoading(true);
+    // blockchain.pixelToken.methods
+    //   .levelUp(_id)
+    //   .send({
+    //     from: _account,
+    //   })
+    //   .once("error", (err) => {
+    //     setLoading(false);
+    //     console.log(err);
+    //   })
+    //   .then((receipt) => {
+    //     setLoading(false);
+    //     console.log(receipt);
+    //     dispatch(fetchData(blockchain.account));
+    //   });
   };
 
-  render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
-    return (
-      <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    dispatch(connect());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (blockchain.account != "" && blockchain.pixelToken != null) {
+  //     dispatch(fetchData(blockchain.account));
+  //   }
+  // }, [blockchain.pixelToken]);
+
+  return <div></div>;
 }
 
 export default App;
