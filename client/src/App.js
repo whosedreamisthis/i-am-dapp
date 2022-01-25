@@ -12,7 +12,7 @@ function App() {
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
 
-  //console.table(blockchain);
+  console.table(blockchain);
 
   const mintNFT = (_account, _name) => {
     setLoading(true);
@@ -51,9 +51,7 @@ function App() {
     //   });
   };
 
-  useEffect(() => {
-    dispatch(connect());
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   // useEffect(() => {
   //   if (blockchain.account != "" && blockchain.pixelToken != null) {
@@ -62,11 +60,25 @@ function App() {
   // }, [blockchain.pixelToken]);
 
   return (
-    <s.Screen style={{ backgroundColor: "pink" }}>
-      <s.Container ai={"center"} style={{ backgroundColor: "green" }}>
-        <s.TextTitle>Our Game</s.TextTitle>
-        <button>Connext</button>
-      </s.Container>
+    <s.Screen>
+      {blockchain.account == "" || blockchain.account == null ? (
+        <s.Container flex={1} ai={"center"} jc={"center"}>
+          <s.TextTitle>Connect to the Game</s.TextTitle>
+          <s.SpacerMedium />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(connect());
+            }}
+          >
+            Connext
+          </button>
+        </s.Container>
+      ) : (
+        <s.Container ai="center" style={{ padding: "24px" }}>
+          <s.TextTitle>Welcome to the game.</s.TextTitle>
+        </s.Container>
+      )}
     </s.Screen>
   );
 }

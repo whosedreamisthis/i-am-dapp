@@ -58,6 +58,23 @@ contract PixelToken is ERC721, Ownable {
         return pixels;
     }
 
+    function getOwnerPixels(address _owner)
+        public
+        view
+        returns (Pixel[] memory) {
+            Pixel[] memory result = result = new Pixel[](balanceOf(_owner));
+            uint256 counter = 0;
+
+            for (uint256 i = 0; i < i < pixels.length; i++ {
+                if (ownerOf(i) == _owner) {
+                    result[counter] = pixels[i];
+                    counter++;
+                }
+            }
+            return result;
+        }
+    {}
+
     function withdraw() external payable onlyOwner {
         address _owner = owner();
         payable(_owner).transfer(address(this).balance);

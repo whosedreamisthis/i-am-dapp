@@ -49,10 +49,9 @@ export const connect = () => {
         const networkId = await window.ethereum.request({
           method: "net_version",
         });
-        console.log("networkId", networkId);
+        // console.log("networkId", networkId);
 
         const pixelTokeNetworkdata = await PixelToken.networks[networkId];
-        console.log(PixelToken.networks);
 
         if (pixelTokeNetworkdata) {
           const pixelToken = new web3.eth.Contract(
@@ -66,7 +65,6 @@ export const connect = () => {
               web3: web3,
             })
           );
-          console.log(pixelToken);
           console.log("ADD UPDATE ACCOUNT LISTENER");
           // Add listeners start
           window.ethereum.on("accountsChanged", (accounts) => {
