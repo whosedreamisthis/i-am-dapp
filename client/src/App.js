@@ -54,11 +54,11 @@ function App() {
 
   useEffect(() => {}, [dispatch]);
 
-  // useEffect(() => {
-  //   if (blockchain.account != "" && blockchain.pixelToken != null) {
-  //     dispatch(fetchData(blockchain.account));
-  //   }
-  // }, [blockchain.pixelToken]);
+  useEffect(() => {
+    if (blockchain.account != "" && blockchain.pixelToken != null) {
+      dispatch(fetchData(blockchain.account));
+    }
+  }, [blockchain.pixelToken]);
 
   return (
     <s.Screen>
@@ -89,6 +89,27 @@ function App() {
           >
             mint
           </button>
+          <s.SpacerSmall />
+          <s.Container
+            jc={"space-between"}
+            fd={"row"}
+            style={{ flexWrap: "wrap", padding: "20px" }}
+          >
+            {data.allPixels.map((item) => {
+              return (
+                <>
+                  <s.Container>
+                    <s.TextDescription>ID: {item.id}</s.TextDescription>
+                    <s.TextDescription>DNA:{item.dna}</s.TextDescription>
+                    <s.TextDescription>LEVEL:{item.level}</s.TextDescription>
+                    <s.TextDescription>NAME:{item.name}</s.TextDescription>
+                    <s.TextDescription>RARITY:{item.rarity}</s.TextDescription>
+                  </s.Container>
+                  <s.SpacerSmall />
+                </>
+              );
+            })}
+          </s.Container>
         </s.Container>
       )}
     </s.Screen>
