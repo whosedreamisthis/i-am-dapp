@@ -64,12 +64,17 @@ export const TextDescription = styled.p`
   color: var(--white);
   font-size: 14px;
   font-weight: 600;
+  padding: 2px;
 `;
 
 export const StyledClickable = styled.div`
   :active {
     opacity: 0.6;
   }
+`;
+
+export const StyledButton = styled.button`
+  padding: "10px";
 `;
 
 // export const Card = styled.div`

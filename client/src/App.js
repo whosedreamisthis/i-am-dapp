@@ -5,6 +5,8 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles.js";
 //import _color from "./assets/images/bg/_color.png";
+import PixelRenderer from "./components/pixelRenderer";
+
 import "./styles/card.css";
 function App() {
   const dispatch = useDispatch();
@@ -87,7 +89,7 @@ function App() {
               mintNFT(blockchain.account, "Unknown");
             }}
           >
-            mint
+            Mint
           </button>
           <s.SpacerSmall />
           <s.Container
@@ -97,34 +99,30 @@ function App() {
           >
             {data.allPixels.map((item) => {
               return (
-                <>
-                  <div className="card">
-                    <s.Container
-                      jc={"space-between"}
-                      fd={"column"}
-                      style={{ flexWrap: "wrap", padding: "20px" }}
+                <div className="card" key={item.id}>
+                  <s.Container
+                    jc={"space-between"}
+                    fd={"column"}
+                    style={{ flexWrap: "wrap", padding: "20px" }}
+                  >
+                    <PixelRenderer pixel={item} />
+                    <s.TextDescription>ID: {item.id}</s.TextDescription>
+                    <s.TextDescription>DNA: {item.dna}</s.TextDescription>
+                    <s.TextDescription>LEVEL: {item.level}</s.TextDescription>
+                    <s.TextDescription>NAME: {item.name}</s.TextDescription>
+                    <s.TextDescription>RARITY: {item.rarity}</s.TextDescription>
+                    <s.SpacerSmall />
+                    <s.StyledButton
+                      disabled={loading ? 1 : 0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        levelUpPixel(blockchain.account, item.id);
+                      }}
                     >
-                      <s.TextDescription>ID: {item.id}</s.TextDescription>
-                      <s.TextDescription>DNA:{item.dna}</s.TextDescription>
-                      <s.TextDescription>LEVEL:{item.level}</s.TextDescription>
-                      <s.TextDescription>NAME:{item.name}</s.TextDescription>
-                      <s.TextDescription>
-                        RARITY:{item.rarity}
-                      </s.TextDescription>
-                      <s.SpacerSmall />
-                      <button
-                        disabled={loading ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          levelUpPixel(blockchain.account, item.id);
-                        }}
-                      >
-                        Level Up
-                      </button>
-                    </s.Container>
-                  </div>
-                  <s.SpacerSmall />
-                </>
+                      Level Up
+                    </s.StyledButton>
+                  </s.Container>
+                </div>
               );
             })}
           </s.Container>
