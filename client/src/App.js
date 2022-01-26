@@ -101,9 +101,13 @@ function App() {
               return (
                 <div className="card" key={item.id}>
                   <s.Container
-                    jc={"space-between"}
+                    jc={"center"}
                     fd={"column"}
-                    style={{ flexWrap: "wrap", padding: "20px" }}
+                    style={{
+                      flexWrap: "wrap",
+                      padding: "20px",
+                      minHeight: "300px",
+                    }}
                   >
                     <PixelRenderer pixel={item} />
                     <s.TextDescription>ID: {item.id}</s.TextDescription>

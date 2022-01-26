@@ -36,8 +36,15 @@ const lightColors = [
   "rgb(244, 241, 222)",
   "rgb(242, 204, 143)",
   "rgb(129, 178, 154)",
+  "rgb(222,164,126)",
+  "rgb(197,216,109)",
 ];
-const darkColors = ["rgb(61, 64, 91)", "rgb(224, 122, 95)"];
+const darkColors = [
+  "rgb(61, 64, 91)",
+  "rgb(224, 122, 95)",
+  "rgb(238,75,106)",
+  "rgb(67,124,144)",
+];
 
 const PixelRenderer = ({ pixel = null, size = 200, style }) => {
   if (!pixel) {
@@ -65,9 +72,8 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
         viewBox="0 0 3000 3000"
         width="300px"
         height="300px"
-        preserveAspectRatio="xMidYMid slice"
       >
-        <rect width="100%" height="100%" fill={pixelDetails.background} />
+        <rect width="3000" height="3000" fill={pixelDetails.background} />
         <text
           fontSize="200"
           id="svg_2"

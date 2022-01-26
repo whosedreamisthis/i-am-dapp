@@ -75,6 +75,7 @@ export const StyledClickable = styled.div`
 
 export const StyledButton = styled.button`
   padding: "10px";
+  background: "rgb(242,204,143)";
 `;
 
 // export const Card = styled.div`
