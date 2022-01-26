@@ -79,9 +79,9 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
           id="svg_2"
           y="762.50056"
           x="425.00049"
-          fill="#000000"
+          fill={isLight ? "#000000" : "#ffffff"}
         >
-          I am dapp.
+          I am {AFFIRMATIONS[pixelDetails.affirmation]}
         </text>
       </svg>
     </div>
