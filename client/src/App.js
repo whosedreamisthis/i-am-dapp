@@ -5,7 +5,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles.js";
 //import _color from "./assets/images/bg/_color.png";
-
+import "./styles/card.css";
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -34,22 +34,22 @@ function App() {
       });
   };
 
-  const levelUpLip = (_account, _id) => {
-    // setLoading(true);
-    // blockchain.pixelToken.methods
-    //   .levelUp(_id)
-    //   .send({
-    //     from: _account,
-    //   })
-    //   .once("error", (err) => {
-    //     setLoading(false);
-    //     console.log(err);
-    //   })
-    //   .then((receipt) => {
-    //     setLoading(false);
-    //     console.log(receipt);
-    //     dispatch(fetchData(blockchain.account));
-    //   });
+  const levelUpPixel = (_account, _id) => {
+    setLoading(true);
+    blockchain.pixelToken.methods
+      .levelUp(_id)
+      .send({
+        from: _account,
+      })
+      .once("error", (err) => {
+        setLoading(false);
+        console.log(err);
+      })
+      .then((receipt) => {
+        setLoading(false);
+        console.log(receipt);
+        dispatch(fetchData(blockchain.account));
+      });
   };
 
   useEffect(() => {}, [dispatch]);
@@ -98,13 +98,31 @@ function App() {
             {data.allPixels.map((item) => {
               return (
                 <>
-                  <s.Container>
-                    <s.TextDescription>ID: {item.id}</s.TextDescription>
-                    <s.TextDescription>DNA:{item.dna}</s.TextDescription>
-                    <s.TextDescription>LEVEL:{item.level}</s.TextDescription>
-                    <s.TextDescription>NAME:{item.name}</s.TextDescription>
-                    <s.TextDescription>RARITY:{item.rarity}</s.TextDescription>
-                  </s.Container>
+                  <div className="card">
+                    <s.Container
+                      jc={"space-between"}
+                      fd={"column"}
+                      style={{ flexWrap: "wrap", padding: "20px" }}
+                    >
+                      <s.TextDescription>ID: {item.id}</s.TextDescription>
+                      <s.TextDescription>DNA:{item.dna}</s.TextDescription>
+                      <s.TextDescription>LEVEL:{item.level}</s.TextDescription>
+                      <s.TextDescription>NAME:{item.name}</s.TextDescription>
+                      <s.TextDescription>
+                        RARITY:{item.rarity}
+                      </s.TextDescription>
+                      <s.SpacerSmall />
+                      <button
+                        disabled={loading ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          levelUpPixel(blockchain.account, item.id);
+                        }}
+                      >
+                        Level Up
+                      </button>
+                    </s.Container>
+                  </div>
                   <s.SpacerSmall />
                 </>
               );

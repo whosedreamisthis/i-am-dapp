@@ -1,7 +1,6 @@
 import styled from "styled-components";
 // Used for wrapping a page component
 export const Screen = styled.div`
-  background-color: var(--dark-grey);
   background-image: ${({ image }) => (image ? `url(${image})` : "none")};
   background-size: cover;
   background-position: center;
@@ -72,3 +71,20 @@ export const StyledClickable = styled.div`
     opacity: 0.6;
   }
 `;
+
+// export const Card = styled.div`
+//   background-color: ${({ test }) => (test ? "pink" : "none")};
+//   width: 100%;
+//   background-image: ${({ image }) => (image ? `url(${image})` : "none")};
+//   background-size: cover;
+//   background-position: center;
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+//   transition: 0.3s;
+//   width: 40%;
+// `;
+
+// export const HoverCard = styled.div`
+//   :hover {
+//     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+//   }
+// `;

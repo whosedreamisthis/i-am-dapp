@@ -79,4 +79,11 @@ contract PixelToken is ERC721, Ownable {
         address _owner = owner();
         payable(_owner).transfer(address(this).balance);
     }
+
+    //actions
+    function levelUp(uint256 _pixelId) public {
+        require(ownerOf(_pixelId) == msg.sender);
+        Pixel storage pixel = pixels[_pixelId];
+        pixel.level++;
+    }
 }
