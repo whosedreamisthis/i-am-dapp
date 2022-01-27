@@ -60,9 +60,11 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
     ? lightColors[dnaStr.substring(1, 2) % lightColors.length]
     : darkColors[dnaStr.substring(1, 2) % darkColors.length];
 
+  //console.log(dnaStr, dnaStr.substring(2, 4), "here2", AFFIRMATIONS.length);
   let pixelDetails = {
     affirmation: dnaStr.substring(2, 4) % AFFIRMATIONS.length,
     background: background,
+    x: dnaStr.substring(2, 4) % AFFIRMATIONS.length,
   };
 
   return (
