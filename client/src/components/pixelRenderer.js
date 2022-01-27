@@ -35,7 +35,6 @@ const AFFIRMATIONS = [
   "joyful.",
 ];
 const lightColors = [
-  "rgb(244, 241, 222)",
   "rgb(242, 204, 143)",
   "rgb(129, 178, 154)",
   "rgb(222,164,126)",
@@ -77,23 +76,24 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
   //   pixelDetails.xOffset,
   //   pixelDetails.yOffset
   // );
+
   const affirmations = [];
   for (let level = 0; level < pixel.level; level++) {
     let x = 100;
     let y = pixelDetails.yOffset + level * 220;
-    if (y > 3000) {
-      y -= 3000;
-    }
+
     if (pixelDetails.doOffsetX) {
-      x = pixelDetails.xOffset + level * 220;
-      if (x > 3000) {
-        x -= 3000;
+      if (pixelDetails.xOffset > 1500) {
+        x = pixelDetails.xOffset - level * 220;
+      } else {
+        x = pixelDetails.xOffset + level * 220;
       }
     }
+
     affirmations.push(
       <text
         fontSize="200"
-        id="svg_2"
+        id={`affirmation${affirmations.length}`}
         y={y}
         x={x}
         fill={isLight ? "#000000" : "#ffffff"}
@@ -101,6 +101,43 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
         I am {AFFIRMATIONS[pixelDetails.affirmation]}
       </text>
     );
+    if (pixelDetails.doOffsetX) {
+      affirmations.push(
+        <text
+          fontSize="200"
+          id={`affirmation${affirmations.length}`}
+          y={y}
+          x={x > 0 ? x - 3000 : x + 3000}
+          fill={isLight ? "#000000" : "#ffffff"}
+        >
+          I am {AFFIRMATIONS[pixelDetails.affirmation]}
+        </text>
+      );
+
+      affirmations.push(
+        <text
+          fontSize="200"
+          id={`affirmation${affirmations.length}`}
+          y={y - 3000}
+          x={x - 3000}
+          fill={isLight ? "#000000" : "#ffffff"}
+        >
+          I am {AFFIRMATIONS[pixelDetails.affirmation]}
+        </text>
+      );
+    } else {
+      affirmations.push(
+        <text
+          fontSize="200"
+          id={`affirmation${affirmations.length}`}
+          y={y - 3000}
+          x={x}
+          fill={isLight ? "#000000" : "#ffffff"}
+        >
+          I am {AFFIRMATIONS[pixelDetails.affirmation]}
+        </text>
+      );
+    }
   }
   return (
     <div className="card columns">
@@ -111,7 +148,7 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
       <div className="card-data">
         <p className="textDescription card-data">ID: {pixel.id}</p>
         <p className="textDescription card-data">DNA: {pixel.dna}</p>
-        <p className="textDescription card-data">LEVEL: {pixel.level}</p>
+        <p className="textDescription card-data">LEVEL: {pixel.level}/10 </p>
         <p className="textDescription card-data">NAME: {pixel.name}</p>
       </div>
     </div>

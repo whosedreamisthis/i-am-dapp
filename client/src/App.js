@@ -62,6 +62,19 @@ function App() {
     }
   }, [blockchain.pixelToken]);
 
+  function isAtMaxLevel(level) {
+    return level >= 10;
+  }
+
+  function isOwner(owner) {
+    return blockchain.account.toLowerCase() == owner.toLowerCase();
+  }
+
+  function nextPixelName() {
+    let paddedNumber = `${data.allPixels.length + 1} `;
+    paddedNumber = paddedNumber.padStart(5, "0");
+    return `Seeker #${paddedNumber}`;
+  }
   return (
     <div className="screen">
       {blockchain.account == "" || blockchain.account == null ? (
@@ -88,20 +101,26 @@ function App() {
             disabled={loading ? 1 : 0}
             onClick={(e) => {
               e.preventDefault();
-              mintNFT(blockchain.account, "Unknown");
+              mintNFT(blockchain.account, nextPixelName());
             }}
           >
             Mint
           </button>
           <div className="spacerSmall" />
           <div className="container row">
-            {data.allOwnerPixels.map((item) => {
+            {data.allPixels.map((item) => {
               return (
                 <div className="nft-container">
                   <PixelRenderer pixel={item} />
                   <div className="spacerSmall" />
                   <button
-                    disabled={loading ? 1 : 0}
+                    disabled={
+                      loading ||
+                      isAtMaxLevel(item.level) ||
+                      !isOwner(item.owner)
+                        ? 1
+                        : 0
+                    }
                     onClick={(e) => {
                       e.preventDefault();
                       levelUpPixel(blockchain.account, item.id);

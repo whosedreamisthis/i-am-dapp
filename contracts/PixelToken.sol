@@ -16,6 +16,7 @@ contract PixelToken is ERC721, Ownable {
         uint256 dna;
         uint8 level;
         uint8 rarity;
+        address owner;
     }
 
     Pixel[] public pixels;
@@ -42,7 +43,14 @@ contract PixelToken is ERC721, Ownable {
         uint8 randRarity = uint8(_createRandomNum(100));
         uint256 randDna = _createRandomNum(10**16);
 
-        Pixel memory newPixel = Pixel(_name, COUNTER, randDna, 1, randRarity);
+        Pixel memory newPixel = Pixel(
+            _name,
+            COUNTER,
+            randDna,
+            1,
+            randRarity,
+            msg.sender
+        );
         pixels.push(newPixel);
         _safeMint(msg.sender, COUNTER);
         emit NewPixel(msg.sender, COUNTER, randDna);
