@@ -97,7 +97,7 @@ function App() {
           <div className="container row">
             {data.allOwnerPixels.map((item) => {
               return (
-                <div>
+                <div className="nft-container">
                   <PixelRenderer pixel={item} />
                   <div className="spacerSmall" />
                   <button

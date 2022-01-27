@@ -4,7 +4,6 @@
   min-width: 200px;
   background: rgb(223, 223, 223);
   border-radius: 10px;
-  margin: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -14,6 +13,8 @@
 }
 
 .card-data {
+  margin: 5px;
+  color: rgb(65, 65, 65);
 }
 
 #frame1 {
@@ -24,4 +25,8 @@
 .svg {
   margin-bottom: 20px;
   width: 100%;
+}
+
+.nft-container {
+  margin: 20px;
 }

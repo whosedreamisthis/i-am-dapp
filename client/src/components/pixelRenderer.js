@@ -109,10 +109,10 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
         {affirmations}
       </svg>
       <div className="card-data">
-        <p className="textDescription">ID: {pixel.id}</p>
-        <p className="textDescription">DNA: {pixel.dna}</p>
-        <p className="textDescription">LEVEL: {pixel.level}</p>
-        <p className="textDescription">NAME: {pixel.name}</p>
+        <p className="textDescription card-data">ID: {pixel.id}</p>
+        <p className="textDescription card-data">DNA: {pixel.dna}</p>
+        <p className="textDescription card-data">LEVEL: {pixel.level}</p>
+        <p className="textDescription card-data">NAME: {pixel.name}</p>
       </div>
     </div>
   );
