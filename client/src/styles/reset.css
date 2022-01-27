@@ -169,10 +169,11 @@ button {
   background: "rgb(242,204,143)";
 
   border: none;
-  color: rgb(0, 0, 0);
+  color: rgb(80, 80, 80);
   padding: 10px;
   text-align: center;
   text-decoration: none;
+  font-weight: 550;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;

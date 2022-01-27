@@ -6,6 +6,7 @@
   border-radius: 15px;
   margin: 10px;
   padding: 5px;
+  background-color: rgba(220, 220, 220, 0.4);
 }
 
 .card:hover {

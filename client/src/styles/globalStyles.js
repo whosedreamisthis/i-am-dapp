@@ -74,7 +74,7 @@ export const StyledClickable = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  padding: "10px";
+  padding: "20px";
   background: "rgb(242,204,143)";
 `;
 
