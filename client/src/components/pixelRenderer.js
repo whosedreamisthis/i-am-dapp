@@ -77,12 +77,23 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
   // );
   const affirmations = [];
   for (let level = 0; level < pixel.level; level++) {
+    let x = 100;
+    let y = pixelDetails.yOffset + level * 220;
+    if (y > 3000) {
+      y -= 3000;
+    }
+    if (pixelDetails.doOffsetX) {
+      x = pixelDetails.xOffset + level * 220;
+      if (x > 3000) {
+        x -= 3000;
+      }
+    }
     affirmations.push(
       <text
         fontSize="200"
         id="svg_2"
-        y={pixelDetails.yOffset + level * 220}
-        x={pixelDetails.doOffsetX ? pixelDetails.xOffset + level * 220 : 100}
+        y={y}
+        x={x}
         fill={isLight ? "#000000" : "#ffffff"}
       >
         I am {AFFIRMATIONS[pixelDetails.affirmation]}

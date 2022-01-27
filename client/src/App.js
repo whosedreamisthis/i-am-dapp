@@ -93,9 +93,14 @@ function App() {
           </button>
           <s.SpacerSmall />
           <s.Container
-            jc={"space-between"}
+            jc={"center"}
             fd={"row"}
-            style={{ flexWrap: "wrap", padding: "20px" }}
+            style={{
+              flexWrap: "wrap",
+              padding: "20px",
+              border: "1px solid brown",
+              height: "500px",
+            }}
           >
             {data.allPixels.map((item) => {
               return (
