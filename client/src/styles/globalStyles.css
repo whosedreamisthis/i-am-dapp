@@ -1,0 +1,72 @@
+.screen {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/*  Used for providing space between components
+ */
+.spacerXSmall {
+  height: 8px;
+  width: 8px;
+}
+
+/*  Used for providing space between components */
+.spacerSmall {
+  height: 16px;
+  width: 16px;
+}
+
+/* Used for providing space between components */
+.spacerMedium {
+  height: 24px;
+  width: 24px;
+}
+
+/*  Used for providing space between components */
+.spacerLarge {
+  height: 32px;
+  width: 32px;
+}
+
+/* Used for providing a wrapper around a component */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.textTitle {
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.textSubTitle {
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.textDescription {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 2px;
+}
+
+.styledClickable :active {
+  opacity: 0.6;
+}

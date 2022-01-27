@@ -1,4 +1,6 @@
 import React from "react";
+import "../styles/card.css";
+import "../styles/globalStyles.css";
 
 const QUESTIONS = ["Who am I?", "Whose dream is this?", ""];
 const AFFIRMATIONS = [
@@ -101,16 +103,17 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
     );
   }
   return (
-    <div id="frame1">
-      <svg
-        style={{ marginBottom: "20px" }}
-        viewBox="0 0 3000 3000"
-        width="100%"
-        height="300px"
-      >
+    <div className="card columns">
+      <svg className="svg" viewBox="0 0 3000 3000" width="100%" height="300px">
         <rect width="3000" height="3000" fill={pixelDetails.background} />
         {affirmations}
       </svg>
+      <div className="card-data">
+        <p className="textDescription">ID: {pixel.id}</p>
+        <p className="textDescription">DNA: {pixel.dna}</p>
+        <p className="textDescription">LEVEL: {pixel.level}</p>
+        <p className="textDescription">NAME: {pixel.name}</p>
+      </div>
     </div>
   );
 };

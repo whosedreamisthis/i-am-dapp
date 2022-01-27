@@ -3,7 +3,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
-import * as s from "./styles/globalStyles.js";
+import "./styles/globalStyles.css";
 //import _color from "./assets/images/bg/_color.png";
 import PixelRenderer from "./components/pixelRenderer";
 
@@ -63,11 +63,12 @@ function App() {
   }, [blockchain.pixelToken]);
 
   return (
-    <s.Screen>
+    <div className="screen">
       {blockchain.account == "" || blockchain.account == null ? (
-        <s.Container flex={1} ai={"center"} jc={"center"}>
-          <s.TextTitle>Connect to the Game</s.TextTitle>
-          <s.SpacerMedium />
+        <div className="container column" style={{ height: "100%" }}>
+          <div className="spacerMedium" />
+          <p className="textTitle">Connect to the Game</p>
+          <div className="spacerMedium" />
 
           <button
             onClick={(e) => {
@@ -77,11 +78,12 @@ function App() {
           >
             Connect
           </button>
-        </s.Container>
+        </div>
       ) : (
-        <s.Container ai={"center"} style={{ padding: "24px" }}>
-          <s.TextTitle>Welcome to the game</s.TextTitle>
-          <s.SpacerSmall />
+        <div className="container column">
+          <div className="spacerMedium" />
+          <p className="textTitle">Welcome to the game</p>
+          <div className="spacerSmall" />
           <button
             disabled={loading ? 1 : 0}
             onClick={(e) => {
@@ -91,53 +93,29 @@ function App() {
           >
             Mint
           </button>
-          <s.SpacerSmall />
-          <s.Container
-            jc={"center"}
-            fd={"row"}
-            style={{
-              flexWrap: "wrap",
-              padding: "20px",
-              border: "1px solid brown",
-              height: "500px",
-            }}
-          >
-            {data.allPixels.map((item) => {
+          <div className="spacerSmall" />
+          <div className="container row">
+            {data.allOwnerPixels.map((item) => {
               return (
-                <div className="card" key={item.id}>
-                  <s.Container
-                    jc={"center"}
-                    fd={"column"}
-                    style={{
-                      flexWrap: "wrap",
-                      padding: "20px",
-                      minHeight: "300px",
+                <div>
+                  <PixelRenderer pixel={item} />
+                  <div className="spacerSmall" />
+                  <button
+                    disabled={loading ? 1 : 0}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      levelUpPixel(blockchain.account, item.id);
                     }}
                   >
-                    <PixelRenderer pixel={item} />
-                    <s.TextDescription>ID: {item.id}</s.TextDescription>
-                    <s.TextDescription>DNA: {item.dna}</s.TextDescription>
-                    <s.TextDescription>LEVEL: {item.level}</s.TextDescription>
-                    <s.TextDescription>NAME: {item.name}</s.TextDescription>
-                    <s.TextDescription>RARITY: {item.rarity}</s.TextDescription>
-                    <s.SpacerSmall />
-                    <s.StyledButton
-                      disabled={loading ? 1 : 0}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        levelUpPixel(blockchain.account, item.id);
-                      }}
-                    >
-                      Level Up
-                    </s.StyledButton>
-                  </s.Container>
+                    Level Up
+                  </button>
                 </div>
               );
             })}
-          </s.Container>
-        </s.Container>
+          </div>
+        </div>
       )}
-    </s.Screen>
+    </div>
   );
 }
 
