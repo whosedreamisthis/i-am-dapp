@@ -24,7 +24,7 @@ function App() {
       .send({
         from: _account,
         gasPrice: "20000000",
-        value: blockchain.web3.utils.toWei("1", "ether"),
+        value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {
         setLoading(false);
@@ -43,6 +43,7 @@ function App() {
       .levelUp(_id)
       .send({
         from: _account,
+        value: blockchain.web3.utils.toWei("0.001", "ether"),
       })
       .once("error", (err) => {
         setLoading(false);
@@ -76,6 +77,17 @@ function App() {
     paddedNumber = paddedNumber.padStart(5, "0");
     return `Seeker #${paddedNumber}`;
   }
+
+  function capture() {
+    var captureEl = document.querySelector("#capture");
+    captureEl.style.fontFeatureSettings = '"liga" 0';
+    var options = {
+      quality: 0.95,
+    };
+
+    console.log(captureEl);
+  }
+
   return (
     <div className="screen">
       {blockchain.account == "" || blockchain.account == null ? (

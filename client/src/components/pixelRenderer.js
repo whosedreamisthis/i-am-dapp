@@ -144,6 +144,7 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
   return (
     <div className="card columns">
       <svg
+        id="capture"
         className="svg"
         viewBox={`0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}`}
         width="100%"
@@ -154,6 +155,7 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
           height={BUSTED_PIXEL_HEIGHT}
           fill={pixelDetails.background}
         />
+
         {affirmations}
       </svg>
       <div className="card-data">
