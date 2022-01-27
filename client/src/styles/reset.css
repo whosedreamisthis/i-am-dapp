@@ -178,4 +178,6 @@ button {
   margin: 4px 2px;
   border-radius: 4px;
   min-width: 100px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }

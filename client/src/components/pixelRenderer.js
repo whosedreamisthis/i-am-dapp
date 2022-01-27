@@ -47,6 +47,8 @@ const darkColors = [
   "rgb(67,124,144)",
 ];
 
+const BUSTED_PIXEL_WIDTH = 3000;
+const BUSTED_PIXEL_HEIGHT = 3000;
 const PixelRenderer = ({ pixel = null, size = 200, style }) => {
   if (!pixel) {
     return null;
@@ -107,7 +109,7 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
           fontSize="200"
           id={`affirmation${affirmations.length}`}
           y={y}
-          x={x > 0 ? x - 3000 : x + 3000}
+          x={x > 0 ? x - BUSTED_PIXEL_WIDTH : x + BUSTED_PIXEL_WIDTH}
           fill={isLight ? "#000000" : "#ffffff"}
         >
           I am {AFFIRMATIONS[pixelDetails.affirmation]}
@@ -118,8 +120,8 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
         <text
           fontSize="200"
           id={`affirmation${affirmations.length}`}
-          y={y - 3000}
-          x={x - 3000}
+          y={y - BUSTED_PIXEL_HEIGHT}
+          x={x - BUSTED_PIXEL_WIDTH}
           fill={isLight ? "#000000" : "#ffffff"}
         >
           I am {AFFIRMATIONS[pixelDetails.affirmation]}
@@ -130,7 +132,7 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
         <text
           fontSize="200"
           id={`affirmation${affirmations.length}`}
-          y={y - 3000}
+          y={y - BUSTED_PIXEL_HEIGHT}
           x={x}
           fill={isLight ? "#000000" : "#ffffff"}
         >
@@ -141,15 +143,30 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
   }
   return (
     <div className="card columns">
-      <svg className="svg" viewBox="0 0 3000 3000" width="100%" height="300px">
-        <rect width="3000" height="3000" fill={pixelDetails.background} />
+      <svg
+        className="svg"
+        viewBox={`0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}`}
+        width="100%"
+        height="300px"
+      >
+        <rect
+          width={BUSTED_PIXEL_WIDTH}
+          height={BUSTED_PIXEL_HEIGHT}
+          fill={pixelDetails.background}
+        />
         {affirmations}
       </svg>
       <div className="card-data">
-        <p className="textDescription card-data">ID: {pixel.id}</p>
-        <p className="textDescription card-data">DNA: {pixel.dna}</p>
-        <p className="textDescription card-data">LEVEL: {pixel.level}/10 </p>
-        <p className="textDescription card-data">NAME: {pixel.name}</p>
+        <p className="textDescription card-data">
+          NAME: <span className="item-value">{pixel.name}</span>
+        </p>
+        {/* <p className="textDescription card-data">ID: {pixel.id}</p> */}
+        <p className="textDescription card-data">
+          DNA: <span className="item-value">{pixel.dna}</span>
+        </p>
+        <p className="textDescription card-data">
+          LEVEL: <span className="item-value">{pixel.level}/10</span>{" "}
+        </p>
       </div>
     </div>
   );

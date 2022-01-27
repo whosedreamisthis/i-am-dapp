@@ -14,7 +14,13 @@
 
 .card-data {
   margin: 5px;
+  color: rgb(102, 102, 102);
+}
+.item-value {
   color: rgb(65, 65, 65);
+  font-weight: 600;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 #frame1 {

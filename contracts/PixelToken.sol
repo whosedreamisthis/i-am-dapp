@@ -8,7 +8,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PixelToken is ERC721, Ownable {
     uint256 COUNTER = 0;
-    uint256 fee = 1 ether;
+    uint256 mintFee = 0.01 ether;
+    uint256 levelUpFee = 0.001 ether;
 
     struct Pixel {
         string name;
@@ -34,8 +35,12 @@ contract PixelToken is ERC721, Ownable {
         return randomNum % _mod;
     }
 
-    function updateFee(uint256 newFee) external onlyOwner {
-        fee = newFee;
+    function updateMintFee(uint256 newFee) external onlyOwner {
+        mintFee = newFee;
+    }
+
+    function updateLevelUpFee(uint256 newFee) external onlyOwner {
+        levelUpFee = newFee;
     }
 
     // Creation
@@ -58,7 +63,7 @@ contract PixelToken is ERC721, Ownable {
     }
 
     function createRandomPixel(string memory _name) public payable {
-        require(msg.value >= fee, "Insufficient funds.");
+        require(msg.value >= mintFee, "Insufficient funds.");
         _createPixel(_name);
     }
 
@@ -89,7 +94,9 @@ contract PixelToken is ERC721, Ownable {
     }
 
     //actions
-    function levelUp(uint256 _pixelId) public {
+    function levelUp(uint256 _pixelId) public payable {
+        require(msg.value >= levelUpFee, "Insufficient funds.");
+
         require(ownerOf(_pixelId) == msg.sender);
         Pixel storage pixel = pixels[_pixelId];
         pixel.level++;

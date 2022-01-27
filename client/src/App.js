@@ -8,6 +8,7 @@ import "./styles/globalStyles.css";
 import PixelRenderer from "./components/pixelRenderer";
 
 import "./styles/card.css";
+import WhoAmI from "./components/whoAmI";
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -95,7 +96,7 @@ function App() {
       ) : (
         <div className="container column">
           <div className="spacerMedium" />
-          <p className="textTitle">Welcome to the game</p>
+          <WhoAmI />
           <div className="spacerSmall" />
           <button
             disabled={loading ? 1 : 0}
