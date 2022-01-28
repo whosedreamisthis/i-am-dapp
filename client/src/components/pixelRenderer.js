@@ -81,14 +81,6 @@ const PixelRenderer = ({
     doOffsetX: dnaStr.substring(7, 8) % 2 == 0,
   };
 
-  // console.log(
-  //   dnaStr,
-  //   dnaStr.substring(3, 6),
-  //   dnaStr.substring(6, 9),
-  //   pixelDetails.xOffset,
-  //   pixelDetails.yOffset
-  // );
-
   const affirmations = [];
   for (let level = 0; level < pixel.level; level++) {
     let x = 100;
@@ -101,6 +93,10 @@ const PixelRenderer = ({
         x = pixelDetails.xOffset + level * 220;
       }
     }
+    console.log("x y", x, y);
+    console.log(x > 0 ? x - BUSTED_PIXEL_WIDTH : x + BUSTED_PIXEL_WIDTH, y);
+    console.log(x - BUSTED_PIXEL_WIDTH, y - BUSTED_PIXEL_HEIGHT);
+    console.log(x, y - BUSTED_PIXEL_HEIGHT);
 
     affirmations.push(
       <text
@@ -113,43 +109,40 @@ const PixelRenderer = ({
         I am {AFFIRMATIONS[pixelDetails.affirmation]}
       </text>
     );
-    if (pixelDetails.doOffsetX) {
-      affirmations.push(
-        <text
-          fontSize="200"
-          id={`affirmation${affirmations.length}`}
-          y={y}
-          x={x > 0 ? x - BUSTED_PIXEL_WIDTH : x + BUSTED_PIXEL_WIDTH}
-          fill={isLight ? "#000000" : "#ffffff"}
-        >
-          I am {AFFIRMATIONS[pixelDetails.affirmation]}
-        </text>
-      );
+    affirmations.push(
+      <text
+        fontSize="200"
+        id={`affirmation${affirmations.length}`}
+        y={y}
+        x={x > 0 ? x - BUSTED_PIXEL_WIDTH : x + BUSTED_PIXEL_WIDTH}
+        fill={isLight ? "#000000" : "#ffffff"}
+      >
+        I am {AFFIRMATIONS[pixelDetails.affirmation]}
+      </text>
+    );
 
-      affirmations.push(
-        <text
-          fontSize="200"
-          id={`affirmation${affirmations.length}`}
-          y={y - BUSTED_PIXEL_HEIGHT}
-          x={x - BUSTED_PIXEL_WIDTH}
-          fill={isLight ? "#000000" : "#ffffff"}
-        >
-          I am {AFFIRMATIONS[pixelDetails.affirmation]}
-        </text>
-      );
-    } else {
-      affirmations.push(
-        <text
-          fontSize="200"
-          id={`affirmation${affirmations.length}`}
-          y={y - BUSTED_PIXEL_HEIGHT}
-          x={x}
-          fill={isLight ? "#000000" : "#ffffff"}
-        >
-          I am {AFFIRMATIONS[pixelDetails.affirmation]}
-        </text>
-      );
-    }
+    affirmations.push(
+      <text
+        fontSize="200"
+        id={`affirmation${affirmations.length}`}
+        y={y - BUSTED_PIXEL_HEIGHT}
+        x={x - BUSTED_PIXEL_WIDTH}
+        fill={isLight ? "#000000" : "#ffffff"}
+      >
+        I am {AFFIRMATIONS[pixelDetails.affirmation]}
+      </text>
+    );
+    affirmations.push(
+      <text
+        fontSize="200"
+        id={`affirmation${affirmations.length}`}
+        y={y - BUSTED_PIXEL_HEIGHT}
+        x={x}
+        fill={isLight ? "#000000" : "#ffffff"}
+      >
+        I am {AFFIRMATIONS[pixelDetails.affirmation]}
+      </text>
+    );
   }
   return (
     <div className="card columns">
@@ -184,9 +177,7 @@ const PixelRenderer = ({
         </div>
         <button
           disabled={
-            loading || isAtMaxLevel(pixel.level) || !isOwner(pixel.owner)
-              ? 1
-              : 0
+            loading || isAtMaxLevel(pixel.level) || !isOwner(pixel) ? 1 : 0
           }
           onClick={(e) => {
             e.preventDefault();

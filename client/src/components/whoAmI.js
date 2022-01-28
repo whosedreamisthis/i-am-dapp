@@ -8,9 +8,11 @@ const WhoAmI = () => {
     const element = document.querySelector("#who-am-i");
     const x = 100 + Math.random() * (window.innerWidth - 200);
     const y = 100 + Math.random() * (window.innerHeight - 200);
+    const h = Math.random() * 360;
     setPosition({ x: x, y: y });
     element.style.top = `${y}px`;
     element.style.left = `${x}px`;
+    element.style.color = `hsl(${h},50%,50%)`;
     console.log(
       "update position ",
       position.x,

@@ -17,7 +17,6 @@ contract PixelToken is ERC721, Ownable {
         uint256 dna;
         uint8 level;
         uint8 rarity;
-        address owner;
     }
 
     Pixel[] public pixels;

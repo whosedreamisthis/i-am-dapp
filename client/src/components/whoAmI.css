@@ -3,7 +3,7 @@
 .who-am-i {
   margin: 20px;
   color: rgb(107, 110, 138);
-  font: 700 normal 2em "Inconsolata";
+  font: 700 normal 1.5em "Inconsolata";
   text-shadow: 2px 2px rgba(87, 87, 87, 0.3);
   position: absolute;
 }

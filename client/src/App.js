@@ -66,8 +66,17 @@ function App() {
     return level >= 10;
   }
 
-  function isOwner(owner) {
-    return blockchain.account.toLowerCase() == owner.toLowerCase();
+  function isOwner(pixel) {
+    const filteredPixels = data.allOwnerPixels.filter((pixelData) => {
+      return pixelData.id === pixel.id;
+    });
+    console.log(
+      "does include? ",
+      data.allOwnerPixels,
+      pixel,
+      filteredPixels.length == 1
+    );
+    return filteredPixels.length == 1;
   }
 
   function nextPixelName() {
