@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+
 .card {
   box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -6,6 +8,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  margin: 20px;
 }
 
 .card:hover {
@@ -18,7 +21,7 @@
 }
 .item-value {
   color: rgb(65, 65, 65);
-  font-weight: 600;
+  font-weight: 1000;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
@@ -31,6 +34,7 @@
 .svg {
   margin-bottom: 20px;
   width: 100%;
+  font-family: "Inconsolata";
 }
 
 .nft-container {

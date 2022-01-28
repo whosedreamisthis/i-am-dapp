@@ -46,6 +46,7 @@ const darkColors = [
   "rgb(238,75,106)",
   "rgb(67,124,144)",
 ];
+const allColors = [...lightColors, ...darkColors];
 
 const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;

@@ -6,16 +6,19 @@ const WhoAmI = () => {
   useEffect(() => {
     if (ref && ref.current) {
       ref.current.addEventListener("mouseover", () => {
-        ref.current.style.position = "absolute";
-        ref.current.style.top = `${Math.random() * window.innerHeight}px`;
-        ref.current.style.left = `${Math.random() * window.innerWidth}px`;
+        ref.current.style.top = `${
+          Math.random() * (window.innerHeight - 200)
+        }px`;
+        ref.current.style.left = `${
+          Math.random() * (window.innerWidth - 200)
+        }px`;
         console.log("mouseover");
       });
     }
   }, [ref.current]);
   return (
     <h1 ref={ref} className="who-am-i">
-      WHO AM I?
+      Who am I?
     </h1>
   );
 };

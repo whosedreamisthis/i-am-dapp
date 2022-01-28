@@ -106,21 +106,23 @@ function App() {
           </button>
         </div>
       ) : (
-        <div className="container column">
+        <div className="container column ">
           <div className="spacerMedium" />
           <WhoAmI />
           <div className="spacerSmall" />
-          <button
-            disabled={loading ? 1 : 0}
-            onClick={(e) => {
-              e.preventDefault();
-              mintNFT(blockchain.account, nextPixelName());
-            }}
-          >
-            Mint
-          </button>
+          <div className="mint">
+            <button
+              disabled={loading ? 1 : 0}
+              onClick={(e) => {
+                e.preventDefault();
+                mintNFT(blockchain.account, nextPixelName());
+              }}
+            >
+              Mint
+            </button>
+          </div>
           <div className="spacerSmall" />
-          <div className="container row">
+          <div className="container row nft-list">
             {data.allPixels.map((item) => {
               return (
                 <div className="nft-container">

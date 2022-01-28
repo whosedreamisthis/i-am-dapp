@@ -70,3 +70,12 @@
 .styledClickable :active {
   opacity: 0.6;
 }
+
+.mint {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
