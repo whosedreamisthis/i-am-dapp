@@ -93,10 +93,10 @@ const PixelRenderer = ({
         x = pixelDetails.xOffset + level * 220;
       }
     }
-    console.log("x y", x, y);
-    console.log(x > 0 ? x - BUSTED_PIXEL_WIDTH : x + BUSTED_PIXEL_WIDTH, y);
-    console.log(x - BUSTED_PIXEL_WIDTH, y - BUSTED_PIXEL_HEIGHT);
-    console.log(x, y - BUSTED_PIXEL_HEIGHT);
+    // console.log("x y", x, y);
+    // console.log(x > 0 ? x - BUSTED_PIXEL_WIDTH : x + BUSTED_PIXEL_WIDTH, y);
+    // console.log(x - BUSTED_PIXEL_WIDTH, y - BUSTED_PIXEL_HEIGHT);
+    // console.log(x, y - BUSTED_PIXEL_HEIGHT);
 
     affirmations.push(
       <text

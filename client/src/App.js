@@ -15,6 +15,12 @@ function App() {
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
 
+  const startMintingProcess = () => {
+    getImageData();
+    mintNFT(blockchain.account, nextPixelName());
+  };
+
+  const getImageData = () => {};
   const mintNFT = (_account, _name) => {
     setLoading(true);
     blockchain.pixelToken.methods
@@ -60,7 +66,7 @@ function App() {
     if (blockchain.account != "" && blockchain.pixelToken != null) {
       dispatch(fetchData(blockchain.account));
     }
-  }, [blockchain.pixelToken]);
+  }, [blockchain.pixelToken, dispatch]);
 
   function isAtMaxLevel(level) {
     return level >= 10;
@@ -119,7 +125,7 @@ function App() {
                 disabled={loading ? 1 : 0}
                 onClick={(e) => {
                   e.preventDefault();
-                  mintNFT(blockchain.account, nextPixelName());
+                  startMintingProcess();
                 }}
               >
                 Mint
