@@ -6,12 +6,18 @@ const WhoAmI = () => {
   const ref = useRef();
   function updatePosition() {
     const element = document.querySelector("#who-am-i");
-    const x = 300 + Math.random() * (window.innerWidth - 600);
-    const y = 300 + Math.random() * (window.innerHeight - 600);
+    const x = 100 + Math.random() * (window.innerWidth - 200);
+    const y = 100 + Math.random() * (window.innerHeight - 200);
     setPosition({ x: x, y: y });
     element.style.top = `${y}px`;
     element.style.left = `${x}px`;
-    console.log("update position ", position.x, position.y);
+    console.log(
+      "update position ",
+      position.x,
+      position.y,
+      window.innerWidth,
+      window.innerHeight
+    );
   }
   useEffect(() => {
     if (ref && ref.current) {

@@ -71,7 +71,7 @@ function App() {
   }
 
   function nextPixelName() {
-    let paddedNumber = `${data.allPixels.length + 1} `;
+    let paddedNumber = `${data.allPixels.length} `;
     paddedNumber = paddedNumber.padStart(5, "0");
     return `Seeker #${paddedNumber}`;
   }

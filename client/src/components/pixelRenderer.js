@@ -168,9 +168,7 @@ const PixelRenderer = ({
 
         {affirmations}
       </svg>
-      <div className="container row">
-        <div className="spacerSmall" />
-      </div>
+
       <div className="container row">
         <div className="card-data">
           <p className="textDescription card-data">
