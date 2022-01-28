@@ -50,7 +50,16 @@ const allColors = [...lightColors, ...darkColors];
 
 const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;
-const PixelRenderer = ({ pixel = null, size = 200, style }) => {
+const PixelRenderer = ({
+  pixel = null,
+  size = 200,
+  style,
+  loading,
+  isAtMaxLevel,
+  levelUpPixel,
+  blockchain,
+  isOwner,
+}) => {
   if (!pixel) {
     return null;
   }
@@ -159,17 +168,35 @@ const PixelRenderer = ({ pixel = null, size = 200, style }) => {
 
         {affirmations}
       </svg>
-      <div className="card-data">
-        <p className="textDescription card-data">
-          NAME: <span className="item-value">{pixel.name}</span>
-        </p>
-        {/* <p className="textDescription card-data">ID: {pixel.id}</p> */}
-        <p className="textDescription card-data">
-          DNA: <span className="item-value">{pixel.dna}</span>
-        </p>
-        <p className="textDescription card-data">
-          LEVEL: <span className="item-value">{pixel.level}/10</span>{" "}
-        </p>
+      <div className="container row">
+        <div className="spacerSmall" />
+      </div>
+      <div className="container row">
+        <div className="card-data">
+          <p className="textDescription card-data">
+            NAME: <span className="item-value">{pixel.name}</span>
+          </p>
+          {/* <p className="textDescription card-data">ID: {pixel.id}</p> */}
+          <p className="textDescription card-data">
+            DNA: <span className="item-value">{pixel.dna}</span>
+          </p>
+          <p className="textDescription card-data">
+            LEVEL: <span className="item-value">{pixel.level}/10</span>{" "}
+          </p>
+        </div>
+        <button
+          disabled={
+            loading || isAtMaxLevel(pixel.level) || !isOwner(pixel.owner)
+              ? 1
+              : 0
+          }
+          onClick={(e) => {
+            e.preventDefault();
+            levelUpPixel(blockchain.account, pixel.id);
+          }}
+        >
+          Level Up
+        </button>
       </div>
     </div>
   );

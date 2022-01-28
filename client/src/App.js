@@ -15,8 +15,6 @@ function App() {
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
 
-  console.table(blockchain);
-
   const mintNFT = (_account, _name) => {
     setLoading(true);
     blockchain.pixelToken.methods
@@ -84,72 +82,74 @@ function App() {
     var options = {
       quality: 0.95,
     };
-
-    console.log(captureEl);
   }
 
   return (
-    <div className="screen">
-      {blockchain.account == "" || blockchain.account == null ? (
-        <div className="container column" style={{ height: "100%" }}>
-          <div className="spacerMedium" />
-          <p className="textTitle">Connect to the Game</p>
-          <div className="spacerMedium" />
+    <>
+      <WhoAmI />
+      <div className="screen">
+        {blockchain.account == "" || blockchain.account == null ? (
+          <div className="container column" style={{ height: "100%" }}>
+            <div className="spacerMedium" />
 
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch(connect());
-            }}
-          >
-            Connect
-          </button>
-        </div>
-      ) : (
-        <div className="container column ">
-          <div className="spacerMedium" />
-          <WhoAmI />
-          <div className="spacerSmall" />
-          <div className="mint">
             <button
-              disabled={loading ? 1 : 0}
+              className="connect"
               onClick={(e) => {
                 e.preventDefault();
-                mintNFT(blockchain.account, nextPixelName());
+                dispatch(connect());
               }}
             >
-              Mint
+              Connect
             </button>
           </div>
-          <div className="spacerSmall" />
-          <div className="container row nft-list">
-            {data.allPixels.map((item) => {
-              return (
-                <div className="nft-container">
-                  <PixelRenderer pixel={item} />
-                  <div className="spacerSmall" />
-                  <button
-                    disabled={
-                      loading ||
-                      isAtMaxLevel(item.level) ||
-                      !isOwner(item.owner)
-                        ? 1
-                        : 0
-                    }
-                    onClick={(e) => {
-                      e.preventDefault();
-                      levelUpPixel(blockchain.account, item.id);
-                    }}
-                  >
-                    Level Up
-                  </button>
-                </div>
-              );
-            })}
+        ) : (
+          <div className="container column ">
+            <div className="spacerMedium" />
+            <div className="mint">
+              <button
+                disabled={loading ? 1 : 0}
+                onClick={(e) => {
+                  e.preventDefault();
+                  mintNFT(blockchain.account, nextPixelName());
+                }}
+              >
+                Mint
+              </button>
+            </div>
+            <div className="spacerSmall" />
+            <div className="container row nft-list">
+              {data.allPixels.map((item) => {
+                return (
+                  <div className="nft-container">
+                    <PixelRenderer
+                      pixel={item}
+                      isOwner={isOwner}
+                      loading={loading}
+                      blockchain={blockchain}
+                      levelUpPixel={levelUpPixel}
+                      isAtMaxLevel={isAtMaxLevel}
+                    />
+                    <div className="spacerSmall" />
+                  </div>
+                );
+              })}
+            </div>
+            {/* <div className="mint">
+              <button
+                disabled={loading ? 1 : 0}
+                onClick={(e) => {
+                  e.preventDefault();
+                  mintNFT(blockchain.account, nextPixelName());
+                }}
+              >
+                Mint
+              </button>
+            </div>
+            */}
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }
 

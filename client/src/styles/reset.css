@@ -166,10 +166,10 @@ div {
 }
 
 button {
-  background-color: rgb(250, 229, 205);
+  background-color: rgb(129, 178, 154);
 
   border: none;
-  color: rgb(80, 80, 80);
+  color: rgb(250, 229, 205);
   padding: 10px;
   text-align: center;
   text-decoration: none;
@@ -182,4 +182,17 @@ button {
 
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+button:active {
+  background-color: rgb(85, 122, 103);
+}
+button:active {
+  background-color: rgb(104, 179, 142);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+button:disabled,
+button[disabled] {
+  background-color: rgb(61, 64, 91);
 }

@@ -65,7 +65,7 @@ export const connect = () => {
               web3: web3,
             })
           );
-          console.log("ADD UPDATE ACCOUNT LISTENER");
+          // console.log("ADD UPDATE ACCOUNT LISTENER");
           // Add listeners start
           window.ethereum.on("accountsChanged", (accounts) => {
             console.log("accountsChanged ", accounts[0]);

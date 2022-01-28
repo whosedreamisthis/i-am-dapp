@@ -2,7 +2,8 @@
   background-size: cover;
   background-position: center;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
 }
@@ -74,8 +75,11 @@
 .mint {
   position: fixed;
   top: 0;
-  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.connect {
+  margin-top: 6rem;
 }

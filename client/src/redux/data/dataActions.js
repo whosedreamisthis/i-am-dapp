@@ -29,12 +29,10 @@ export const fetchData = (account) => {
         .getState()
         .blockchain.pixelToken.methods.getPixels()
         .call();
-      console.log("allPixels", allPixels);
       let allOwnerPixels = await store
         .getState()
         .blockchain.pixelToken.methods.getOwnerPixels(account)
         .call();
-      console.log("allOwnerPixels", allOwnerPixels);
 
       dispatch(
         fetchDataSuccess({
