@@ -5,7 +5,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import "./styles/globalStyles.css";
 //import _color from "./assets/images/bg/_color.png";
-import PixelRenderer from "./components/pixelRenderer";
+import PixelRenderer, { getSVG } from "./components/pixelRenderer";
 
 import "./styles/card.css";
 import WhoAmI from "./components/whoAmI";
@@ -15,12 +15,23 @@ function App() {
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
 
+  function createRandomNum() {
+    return Math.floor(Math.random() * 10 ** 16);
+  }
   const startMintingProcess = () => {
+    const randDNA = createRandomNum();
+    console.log(getSVG(randDNA));
     getImageData();
     mintNFT(blockchain.account, nextPixelName());
   };
 
-  const getImageData = () => {};
+  const getImageData = () => {
+    var captureEl = document.querySelector("#capture");
+    var b64 = "data:image/svg+xml;base64," + window.btoa(captureEl.outerHTML);
+
+    // 3. convert svg to base64
+    console.log(b64);
+  };
   const mintNFT = (_account, _name) => {
     setLoading(true);
     blockchain.pixelToken.methods

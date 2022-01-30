@@ -19,6 +19,24 @@ contract PixelToken is ERC721, Ownable {
         uint8 rarity;
     }
 
+    mapping(uint256 => string) tokenURIs;
+
+    function _setTokenURI(uint256 _tokenId, string memory _tokenURI) internal {
+        tokenURIs[_tokenId] = _tokenURI;
+    }
+
+    function tokenURI(uint256 _tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        require(_exists(_tokenId));
+        string memory _tokenURI = tokenURIs[_tokenId];
+        return _tokenURI;
+    }
+
     Pixel[] public pixels;
     event NewPixel(address indexed owner, uint256 id, uint256 dna);
 
@@ -43,27 +61,24 @@ contract PixelToken is ERC721, Ownable {
     }
 
     // Creation
-    function _createPixel(string memory _name) internal {
+    function _createPixel(string memory _name, string memory _uri) internal {
         uint8 randRarity = uint8(_createRandomNum(100));
         uint256 randDna = _createRandomNum(10**16);
 
-        Pixel memory newPixel = Pixel(
-            _name,
-            COUNTER,
-            randDna,
-            1,
-            randRarity,
-            msg.sender
-        );
+        Pixel memory newPixel = Pixel(_name, COUNTER, randDna, 1, randRarity);
         pixels.push(newPixel);
         _safeMint(msg.sender, COUNTER);
+        _setTokenURI(COUNTER, _uri);
         emit NewPixel(msg.sender, COUNTER, randDna);
         COUNTER++;
     }
 
-    function createRandomPixel(string memory _name) public payable {
+    function createRandomPixel(string memory _name, string memory _uri)
+        public
+        payable
+    {
         require(msg.value >= mintFee, "Insufficient funds.");
-        _createPixel(_name);
+        _createPixel(_name, _uri);
     }
 
     // Getters

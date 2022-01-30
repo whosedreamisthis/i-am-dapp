@@ -50,6 +50,52 @@ const allColors = [...lightColors, ...darkColors];
 
 const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;
+
+export function getSVG(dna, level) {
+  let dnaStr = String(dna);
+
+  while (dnaStr.length < 16) dnaStr = "0" + dnaStr;
+
+  const isLight = dnaStr.substring(0, 1) % 2;
+  const background = isLight
+    ? lightColors[dnaStr.substring(1, 2) % lightColors.length]
+    : darkColors[dnaStr.substring(1, 2) % darkColors.length];
+
+  let a = AFFIRMATIONS[dnaStr.substring(2, 4) % AFFIRMATIONS.length];
+  let pixelDetails = {
+    affirmation: a,
+    background: background,
+    xOffset:
+      100 +
+      (dnaStr.substring(3, 7) % (BUSTED_PIXEL_WIDTH - 90 * (a.length + 5))), // (dnaStr.substring(3, 7) % (BUSTED_PIXEL_WIDTH * 0.7)),
+    yOffset: 100 + (dnaStr.substring(7, 11) % (BUSTED_PIXEL_HEIGHT - 300)),
+    doOffsetX: dnaStr.substring(7, 8) % 2 == 0,
+  };
+  const fill = isLight ? "#000000" : "#ffffff";
+  const encodedData = `<svg  width="100%" height="300" viewBox="0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}" xmlns='http://www.w3.org/2000/svg'>
+  <rect
+      width="100%"
+      height="100%"
+      fill="${pixelDetails.background}"
+    />
+    <text
+        font-size="200"
+        y="${pixelDetails.yOffset}"
+        x="${pixelDetails.xOffset}"
+        fill="${fill}"
+      >
+      I am ${a}
+      </text>
+    </svg>`;
+
+  var b64 = "data:image/svg+xml; base64," + window.btoa(encodedData);
+  console.log(encodedData, b64, pixelDetails);
+
+  //data:image/svg+xml;base64,
+  // Encode the SVG as base64
+
+  return b64;
+}
 const PixelRenderer = ({
   pixel = null,
   size = 200,
