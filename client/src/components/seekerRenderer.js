@@ -48,7 +48,7 @@ const darkColors = [
 ];
 const allColors = [...lightColors, ...darkColors];
 
-const PATH = {
+const PATHS = {
   south: "south",
   southEast: "south-east",
   east: "east",
@@ -62,39 +62,17 @@ const PATH = {
 
 const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;
-const MAX_NUM_AFFIRMATIONS = 10;
-function createAffirmations(seekerDetails) {
-  const positions = [{ x: seekerDetails.xOffset, y: seekerDetails.yOffset }];
-  let x = seekerDetails.xOffset;
-  let y = seekerDetails.yOffset;
-  for (let level = 1; level < seekerDetails.level; level++) {
-    x += 220;
-    y += 220;
-    positions.push({ x: x, y: y });
-  }
+const MAX_NUM_AFFIRMATIONS = 7;
 
-  let newArray = positions.map((p) => {
-    return `<text
-    font-size="200"
-    y="${p.x}"
-    x="${p.y}"
-  >
-  I am ${seekerDetails.affirmation}
-  </text>`;
-  });
-  return newArray;
-}
-function buildAffirmation(seekerDetails, x, y) {
-  const affirmations = [];
-  const fill = seekerDetails.isLight ? "#000000" : "#ffffff";
-
+function buildAffirmation(p) {
+  console.log("p", p);
   return `<text
   font-size="200"
-  y="${seekerDetails.yOffset + x}"
-  x="${seekerDetails.xOffset + y}"
-  fill="${fill}"
+  x="${p.x}"
+  y="${p.y}"
+  fill="${p.fill}"
 >
-I am ${seekerDetails.affirmation}
+I am ${p.affirmation}
 </text>`;
 }
 
@@ -102,35 +80,66 @@ function createSouthAffirmations(seekerDetails) {
   const startX = 100 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5);
   const startY = 100 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5 - 100);
   let randAffirmation = Math.floor(Math.random() * AFFIRMATIONS.length);
-  const positions = [{ affirmation: randAffirmation, x: startX, y: startY }];
+  const positions = [];
   let x = startX;
   let y = startY;
-  for (let level = 1; level < seekerDetails.numAffirmations; level++) {
+  for (let level = 0; level < seekerDetails.numAffirmations; level++) {
+    randAffirmation =
+      AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)];
+
+    positions.push({
+      affirmation: randAffirmation,
+      x: x,
+      y: y,
+      fill: seekerDetails.color,
+    });
     x += 0;
     y += 220;
-    randAffirmation = Math.floor(Math.random() * AFFIRMATIONS.length);
-
-    positions.push({ affirmation: randAffirmation, x: x, y: y });
   }
 
   let newArray = positions.map((p) => {
-    return `<text
-    font-size="200"
-    y="${p.y}"
-    x="${p.x}"
-  >
-  I am ${AFFIRMATIONS[p.affirmation]}
-  </text>`;
+    return buildAffirmation(p);
+  });
+  return newArray;
+}
+
+function createNorthAffirmations(seekerDetails) {
+  const startX = 100 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5);
+  const startY =
+    BUSTED_PIXEL_WIDTH * 0.5 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5 - 100);
+  let randAffirmation = Math.floor(Math.random() * AFFIRMATIONS.length);
+  const positions = [];
+  let x = startX;
+  let y = startY;
+  for (let level = 0; level < seekerDetails.numAffirmations; level++) {
+    randAffirmation =
+      AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)];
+    positions.push({
+      affirmation: randAffirmation,
+      x: x,
+      y: y,
+      fill: seekerDetails.color,
+    });
+    x += 0;
+    y -= 220;
+  }
+
+  let newArray = positions.map((p) => {
+    return buildAffirmation(p);
   });
   return newArray;
 }
 
 function createAffirmationElements(seekerDetails) {
   console.log(seekerDetails);
-  return createSouthAffirmations(seekerDetails);
+
+  return createNorthAffirmations(seekerDetails);
   // if (seekerDetails.path === PATHS.south) {
   //   return createSouthAffirmations(seekerDetails);
-  // } else if (seekerDetails.path === "downLeft") {
+  // }
+  // if (seekerDetails.path === PATHS.north) {
+  //   return createNorthAffirmations(seekerDetails);
+  // }
   //   return createDownAffirmations(seekerDetails);
   // } else if (seekerDetails.path === "up") {
   //   return createDownAffirmations(seekerDetails);
@@ -164,7 +173,7 @@ export function createRandomSeeker() {
     numAffirmations: Math.floor(Math.random() * MAX_NUM_AFFIRMATIONS),
     background: background,
     color: color,
-    path: Math.floor(Math.random() * PATH.length),
+    path: Math.floor(Math.random() * PATHS.length),
   };
 
   const encodedSeekerData = buildImage(seekerDetails);
