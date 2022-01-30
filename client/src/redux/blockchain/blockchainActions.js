@@ -1,6 +1,6 @@
 // constants
 import Web3 from "web3";
-import PixelToken from "../../contracts/PixelToken.json";
+import SeekerToken from "../../contracts/SeekerToken.json";
 // log
 import { fetchData } from "../data/dataActions";
 
@@ -51,17 +51,17 @@ export const connect = () => {
         });
         // console.log("networkId", networkId);
 
-        const pixelTokeNetworkdata = await PixelToken.networks[networkId];
+        const seekerTokeNetworkdata = await SeekerToken.networks[networkId];
 
-        if (pixelTokeNetworkdata) {
-          const pixelToken = new web3.eth.Contract(
-            PixelToken.abi,
-            pixelTokeNetworkdata.address
+        if (seekerTokeNetworkdata) {
+          const seekerToken = new web3.eth.Contract(
+            SeekerToken.abi,
+            seekerTokeNetworkdata.address
           );
           dispatch(
             connectSuccess({
               account: accounts[0],
-              pixelToken: pixelToken,
+              seekerToken: seekerToken,
               web3: web3,
             })
           );

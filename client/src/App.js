@@ -5,7 +5,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import "./styles/globalStyles.css";
 //import _color from "./assets/images/bg/_color.png";
-import PixelRenderer, { getSVG } from "./components/pixelRenderer";
+import SeekerRenderer, { getSVG } from "./components/seekerRenderer";
 
 import "./styles/card.css";
 import WhoAmI from "./components/whoAmI";
@@ -20,9 +20,9 @@ function App() {
   }
   const startMintingProcess = () => {
     const randDNA = createRandomNum();
-    console.log(getSVG(randDNA));
-    getImageData();
-    mintNFT(blockchain.account, nextPixelName());
+    const dataURI = getSVG(randDNA);
+    //getImageData();
+    mintNFT(blockchain.account, nextSeekerName(), dataURI);
   };
 
   const getImageData = () => {
@@ -32,10 +32,10 @@ function App() {
     // 3. convert svg to base64
     console.log(b64);
   };
-  const mintNFT = (_account, _name) => {
+  const mintNFT = (_account, _name, uri) => {
     setLoading(true);
-    blockchain.pixelToken.methods
-      .createRandomPixel(_name)
+    blockchain.seekerToken.methods
+      .mint(uri)
       .send({
         from: _account,
         gasPrice: "20000000",
@@ -52,52 +52,33 @@ function App() {
       });
   };
 
-  const levelUpPixel = (_account, _id) => {
-    setLoading(true);
-    blockchain.pixelToken.methods
-      .levelUp(_id)
-      .send({
-        from: _account,
-        value: blockchain.web3.utils.toWei("0.001", "ether"),
-      })
-      .once("error", (err) => {
-        setLoading(false);
-        console.log(err);
-      })
-      .then((receipt) => {
-        setLoading(false);
-        console.log(receipt);
-        dispatch(fetchData(blockchain.account));
-      });
-  };
-
   useEffect(() => {}, [dispatch]);
 
   useEffect(() => {
-    if (blockchain.account != "" && blockchain.pixelToken != null) {
+    if (blockchain.account != "" && blockchain.seekerToken != null) {
       dispatch(fetchData(blockchain.account));
     }
-  }, [blockchain.pixelToken, dispatch]);
+  }, [blockchain.seekerToken, dispatch]);
 
   function isAtMaxLevel(level) {
     return level >= 10;
   }
 
-  function isOwner(pixel) {
-    const filteredPixels = data.allOwnerPixels.filter((pixelData) => {
-      return pixelData.id === pixel.id;
+  function isOwner(seeker) {
+    const filteredSeekers = data.allOwnerSeekers.filter((seekerData) => {
+      return seekerData.id === seeker.id;
     });
     console.log(
       "does include? ",
-      data.allOwnerPixels,
-      pixel,
-      filteredPixels.length == 1
+      data.allOwnerSeekers,
+      seeker,
+      filteredSeekers.length == 1
     );
-    return filteredPixels.length == 1;
+    return filteredSeekers.length == 1;
   }
 
-  function nextPixelName() {
-    let paddedNumber = `${data.allPixels.length} `;
+  function nextSeekerName() {
+    let paddedNumber = `${data.allSeekers.length} `;
     paddedNumber = paddedNumber.padStart(5, "0");
     return `Seeker #${paddedNumber}`;
   }
@@ -144,15 +125,14 @@ function App() {
             </div>
             <div className="spacerSmall" />
             <div className="container row nft-list">
-              {data.allPixels.map((item) => {
+              {data.allSeekers.map((item) => {
                 return (
                   <div className="nft-container">
-                    <PixelRenderer
-                      pixel={item}
+                    <SeekerRenderer
+                      seeker={item}
                       isOwner={isOwner}
                       loading={loading}
                       blockchain={blockchain}
-                      levelUpPixel={levelUpPixel}
                       isAtMaxLevel={isAtMaxLevel}
                     />
                     <div className="spacerSmall" />
@@ -165,7 +145,7 @@ function App() {
                 disabled={loading ? 1 : 0}
                 onClick={(e) => {
                   e.preventDefault();
-                  mintNFT(blockchain.account, nextPixelName());
+                  mintNFT(blockchain.account, nextSeekerName());
                 }}
               >
                 Mint

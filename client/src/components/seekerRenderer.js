@@ -48,15 +48,63 @@ const darkColors = [
 ];
 const allColors = [...lightColors, ...darkColors];
 
-const SEEKER_WIDTH = 3000;
-const SEEKER_HEIGHT = 3000;
-const SeekerRenderer = ({ seeker = null, size = 200, style, loading }) => {
-  if (!seeker) {
-    return null;
+const BUSTED_PIXEL_WIDTH = 3000;
+const BUSTED_PIXEL_HEIGHT = 3000;
+
+function createAffirmations(seekerDetails) {
+  const fill = seekerDetails.isLight ? "#000000" : "#ffffff";
+
+  const positions = [{ x: seekerDetails.xOffset, y: seekerDetails.yOffset }];
+  let x = seekerDetails.xOffset;
+  let y = seekerDetails.yOffset;
+  for (let level = 1; level < seekerDetails.level; level++) {
+    x += 220;
+    y += 220;
+    positions.push({ x: x, y: y });
   }
 
-  console.log(seeker);
-  let dnaStr = String(seeker.dna);
+  let newArray = positions.map((p) => {
+    return `<text
+    font-size="200"
+    y="${p.x}"
+    x="${p.y}"
+    fill="${fill}"
+  >
+  I am ${seekerDetails.affirmation}
+  </text>`;
+  });
+  console.log(newArray);
+  return newArray;
+}
+function buildAffirmation(seekerDetails, x, y) {
+  const affirmations = [];
+  const fill = seekerDetails.isLight ? "#000000" : "#ffffff";
+
+  return `<text
+  font-size="200"
+  y="${seekerDetails.yOffset + x}"
+  x="${seekerDetails.xOffset + y}"
+  fill="${fill}"
+>
+I am ${seekerDetails.affirmation}
+</text>`;
+}
+
+function buildImage(seekerDetails) {
+  let affirmations = createAffirmations(seekerDetails);
+
+  return `<svg  width="300" height="300" viewBox="0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}" xmlns='http://www.w3.org/2000/svg'>
+  <rect
+      width="100%"
+      height="100%"
+      fill="${seekerDetails.background}"
+    />
+    ${affirmations}
+
+    </svg>`;
+}
+export function getSVG(dna) {
+  let dnaStr = String(dna);
 
   while (dnaStr.length < 16) dnaStr = "0" + dnaStr;
 
@@ -65,112 +113,51 @@ const SeekerRenderer = ({ seeker = null, size = 200, style, loading }) => {
     ? lightColors[dnaStr.substring(1, 2) % lightColors.length]
     : darkColors[dnaStr.substring(1, 2) % darkColors.length];
 
+  let a = AFFIRMATIONS[dnaStr.substring(2, 4) % AFFIRMATIONS.length];
   let seekerDetails = {
-    affirmation: dnaStr.substring(2, 4) % AFFIRMATIONS.length,
+    affirmation: a,
     background: background,
-    xOffset: +dnaStr.substring(3, 6) * 1.5 + 200,
-    yOffset: +dnaStr.substring(6, 9) * 1.5 + 200,
+    xOffset:
+      100 +
+      (dnaStr.substring(3, 7) % (BUSTED_PIXEL_WIDTH - 90 * (a.length + 5))), // (dnaStr.substring(3, 7) % (BUSTED_PIXEL_WIDTH * 0.7)),
+    yOffset: 100 + (dnaStr.substring(7, 11) % (BUSTED_PIXEL_HEIGHT - 300)),
     doOffsetX: dnaStr.substring(7, 8) % 2 == 0,
+    isLight: isLight,
+    level: 5,
   };
+  const encodedData = buildImage(seekerDetails);
 
-  const affirmations = [];
-  for (let level = 0; level < seeker.level; level++) {
-    let x = 100;
-    let y = seekerDetails.yOffset + level * 220;
+  var b64 = "data:image/svg+xml; base64," + window.btoa(encodedData);
+  console.log(encodedData, b64, seekerDetails);
 
-    if (seekerDetails.doOffsetX) {
-      if (seekerDetails.xOffset > 1500) {
-        x = seekerDetails.xOffset - level * 220;
-      } else {
-        x = seekerDetails.xOffset + level * 220;
-      }
-    }
+  //data:image/svg+xml;base64,
+  // Encode the SVG as base64
 
-    affirmations.push(
-      <text
-        fontSize="200"
-        id={`affirmation${affirmations.length}`}
-        y={y}
-        x={x}
-        fill={isLight ? "#000000" : "#ffffff"}
-      >
-        I am {AFFIRMATIONS[seekerDetails.affirmation]}
-      </text>
-    );
-    affirmations.push(
-      <text
-        fontSize="200"
-        id={`affirmation${affirmations.length}`}
-        y={y}
-        x={x > 0 ? x - SEEKER_WIDTH : x + SEEKER_WIDTH}
-        fill={isLight ? "#000000" : "#ffffff"}
-      >
-        I am {AFFIRMATIONS[seekerDetails.affirmation]}
-      </text>
-    );
-
-    affirmations.push(
-      <text
-        fontSize="200"
-        id={`affirmation${affirmations.length}`}
-        y={y - SEEKER_HEIGHT}
-        x={x - SEEKER_WIDTH}
-        fill={isLight ? "#000000" : "#ffffff"}
-      >
-        I am {AFFIRMATIONS[seekerDetails.affirmation]}
-      </text>
-    );
-    affirmations.push(
-      <text
-        fontSize="200"
-        id={`affirmation${affirmations.length}`}
-        y={y - SEEKER_HEIGHT}
-        x={x}
-        fill={isLight ? "#000000" : "#ffffff"}
-      >
-        I am {AFFIRMATIONS[seekerDetails.affirmation]}
-      </text>
-    );
+  return b64;
+}
+const SeekerRenderer = ({
+  seeker = null,
+  size = 200,
+  style,
+  loading,
+  isAtMaxLevel,
+  blockchain,
+  isOwner,
+}) => {
+  if (!seeker) {
+    return null;
   }
+
   return (
     <div className="card columns">
-      <svg
-        id="capture"
-        className="svg"
-        viewBox={`0 0 ${SEEKER_WIDTH} ${SEEKER_HEIGHT}`}
-        width="100%"
-        height="300px"
-      >
-        <rect
-          width={SEEKER_WIDTH}
-          height={SEEKER_HEIGHT}
-          fill={seekerDetails.background}
-        />
-
-        <text
-          fontFamily="san serif"
-          fontSize="200"
-          id={`affirmation${affirmations.length}`}
-          y={300}
-          x={1300}
-          fill={isLight ? "#000000" : "#ffffff"}
-        >
-          I am emough.
-          <animate
-            attributeName="x"
-            values={`${300};1000;${300}`}
-            dur="30s"
-            repeatCount="indefinite"
-          />
-        </text>
-        {affirmations}
-      </svg>
+      <img src={seeker.uri} />
 
       <div className="container row">
         <div className="card-data">
           <p className="textDescription card-data">
             NAME: <span className="item-value">{seeker.name}</span>
           </p>
+          {/* <p className="textDescription card-data">ID: {seeker.id}</p> */}
           <p className="textDescription card-data">
             DNA: <span className="item-value">{seeker.dna}</span>
           </p>

@@ -1,7 +1,7 @@
 const initialState = {
   loading: false,
   account: null,
-  pixelToken: null,
+  seekerToken: null,
   web3: null,
   errorMsg: "",
 };
@@ -18,7 +18,7 @@ const blockchainReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         account: action.payload.account,
-        pixelToken: action.payload.pixelToken,
+        seekerToken: action.payload.seekerToken,
         web3: action.payload.web3,
       };
     case "CONNECTION_FAILED":

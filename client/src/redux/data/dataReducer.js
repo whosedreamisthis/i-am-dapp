@@ -1,7 +1,7 @@
 const initialState = {
   loading: false,
-  allPixels: [],
-  allOwnerPixels: [],
+  allSeekers: [],
+  allOwnerSeekers: [],
   error: false,
   errorMsg: "",
 };
@@ -17,8 +17,8 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...initialState,
         loading: false,
-        allPixels: action.payload.allPixels,
-        allOwnerPixels: action.payload.allOwnerPixels,
+        allSeekers: action.payload.allSeekers,
+        allOwnerSeekers: action.payload.allOwnerSeekers,
       };
     case "CHECK_DATA_FAILED":
       return {

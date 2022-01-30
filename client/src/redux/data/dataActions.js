@@ -25,19 +25,20 @@ export const fetchData = (account) => {
   return async (dispatch) => {
     dispatch(fetchDataRequest());
     try {
-      let allPixels = await store
+      let allSeekers = await store
         .getState()
-        .blockchain.pixelToken.methods.getPixels()
+        .blockchain.seekerToken.methods.getAllSeekers()
         .call();
-      let allOwnerPixels = await store
+      let allOwnerSeekers = await store
         .getState()
-        .blockchain.pixelToken.methods.getOwnerPixels(account)
+        .blockchain.seekerToken.methods.getOwnerSeekers()
         .call();
 
+      console.log("all seekers", allSeekers);
       dispatch(
         fetchDataSuccess({
-          allPixels,
-          allOwnerPixels,
+          allSeekers,
+          allOwnerSeekers,
         })
       );
     } catch (err) {
