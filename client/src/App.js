@@ -5,7 +5,9 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import "./styles/globalStyles.css";
 //import _color from "./assets/images/bg/_color.png";
-import SeekerRenderer, { getSVG } from "./components/seekerRenderer";
+import SeekerRenderer, {
+  createRandomSeeker,
+} from "./components/seekerRenderer";
 
 import "./styles/card.css";
 import WhoAmI from "./components/whoAmI";
@@ -14,15 +16,18 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
-
+  const [NFTs, setNFTs] = useState([]);
   function createRandomNum() {
     return Math.floor(Math.random() * 10 ** 16);
   }
   const startMintingProcess = () => {
-    const randDNA = createRandomNum();
-    const dataURI = getSVG(randDNA);
+    const name = nextSeekerName();
+    const description =
+      "Whether black, white, or any color in between, I am limitless.";
+    const dataURI = createRandomSeeker();
+    const metadata = { name: name, description: description, image: dataURI };
     //getImageData();
-    mintNFT(blockchain.account, nextSeekerName(), dataURI);
+    mintNFT(blockchain.account, nextSeekerName(), JSON.stringify(metadata));
   };
 
   const getImageData = () => {
@@ -30,7 +35,6 @@ function App() {
     var b64 = "data:image/svg+xml;base64," + window.btoa(captureEl.outerHTML);
 
     // 3. convert svg to base64
-    console.log(b64);
   };
   const mintNFT = (_account, _name, uri) => {
     setLoading(true);
@@ -52,7 +56,24 @@ function App() {
       });
   };
 
-  useEffect(() => {}, [dispatch]);
+  const fetchMetadataForNFTs = () => {
+    setNFTs([]);
+    data.allSeekers.forEach((nft) => {
+      fetch(nft.uri)
+        .then((response) => response.json())
+        .then((metaData) => {
+          setNFTs((prevState) => [
+            ...prevState,
+            { id: nft.id, metaData: metaData },
+          ]);
+        })
+        .catch((err) => console.log);
+    });
+  };
+
+  useEffect(() => {
+    fetchMetadataForNFTs();
+  }, [data.allSeekers]);
 
   useEffect(() => {
     if (blockchain.account != "" && blockchain.seekerToken != null) {
@@ -78,8 +99,8 @@ function App() {
   }
 
   function nextSeekerName() {
-    let paddedNumber = `${data.allSeekers.length} `;
-    paddedNumber = paddedNumber.padStart(5, "0");
+    let paddedNumber = `${data.allSeekers.length}`;
+    paddedNumber = paddedNumber.padStart(4, "0");
     return `Seeker #${paddedNumber}`;
   }
 
@@ -132,8 +153,6 @@ function App() {
                       seeker={item}
                       isOwner={isOwner}
                       loading={loading}
-                      blockchain={blockchain}
-                      isAtMaxLevel={isAtMaxLevel}
                     />
                     <div className="spacerSmall" />
                   </div>

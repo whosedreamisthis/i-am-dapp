@@ -13,19 +13,14 @@ const WhoAmI = () => {
     element.style.top = `${y}px`;
     element.style.left = `${x}px`;
     element.style.color = `hsl(${h},50%,50%)`;
-    console.log(
-      "update position ",
-      position.x,
-      position.y,
-      window.innerWidth,
-      window.innerHeight
-    );
   }
   useEffect(() => {
     if (ref && ref.current) {
       ref.current.addEventListener("mouseover", updatePosition, false);
       return function cleanup() {
-        ref.current.removeEventListener("mouseover", updatePosition, false);
+        if (ref && ref.current) {
+          ref.current.removeEventListener("mouseover", updatePosition, false);
+        }
       };
     }
   }, [ref]);
