@@ -34,7 +34,6 @@ export const fetchData = (account) => {
         .blockchain.seekerToken.methods.getOwnerSeekers()
         .call();
 
-      console.log("all seekers", allSeekers);
       dispatch(
         fetchDataSuccess({
           allSeekers,

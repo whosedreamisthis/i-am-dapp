@@ -49,7 +49,6 @@ export const connect = () => {
         const networkId = await window.ethereum.request({
           method: "net_version",
         });
-        // console.log("networkId", networkId);
 
         const seekerTokeNetworkdata = await SeekerToken.networks[networkId];
 
@@ -65,7 +64,6 @@ export const connect = () => {
               web3: web3,
             })
           );
-          // console.log("ADD UPDATE ACCOUNT LISTENER");
           // Add listeners start
           window.ethereum.on("accountsChanged", (accounts) => {
             console.log("accountsChanged ", accounts[0]);

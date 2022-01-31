@@ -24,7 +24,6 @@ const AFFIRMATIONS = [
   "grateful.",
   "fearless.",
   "passionate.",
-  "comassionate.",
   "blessed.",
   "magic.",
   "free.",
@@ -60,80 +59,51 @@ const PATHS = {
   random: "random",
 };
 
+const HEIGHTS = [200, 450, 700, 1000, 1300, 1600, 1900, 2200, 2500, 2800];
+
 const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;
-const MAX_NUM_AFFIRMATIONS = 7;
+const MAX_NUM_AFFIRMATIONS = 5;
 
 function buildAffirmation(p) {
-  console.log("p", p);
   return `<text
   font-size="200"
   x="${p.x}"
   y="${p.y}"
   fill="${p.fill}"
 >
+
 I am ${p.affirmation}
 </text>`;
 }
 
-function createSouthAffirmations(seekerDetails) {
-  const startX = 100 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5);
-  const startY = 100 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5 - 100);
-  let randAffirmation = Math.floor(Math.random() * AFFIRMATIONS.length);
-  const positions = [];
-  let x = startX;
-  let y = startY;
-  for (let level = 0; level < seekerDetails.numAffirmations; level++) {
-    randAffirmation =
-      AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)];
+function createRandomAffirmations(seekerDetails) {
+  const shuffledAffirmations = AFFIRMATIONS.sort(() => 0.5 - Math.random());
 
-    positions.push({
-      affirmation: randAffirmation,
-      x: x,
-      y: y,
+  const shuffledHeights = HEIGHTS.sort(() => 0.5 - Math.random());
+
+  const affirmations = [];
+
+  for (let level = 0; level < seekerDetails.numAffirmations; level++) {
+    affirmations.push({
+      affirmation: shuffledAffirmations[level],
+      x: 200 + Math.random() * BUSTED_PIXEL_WIDTH * 0.5,
+      y: shuffledHeights[level],
       fill: seekerDetails.color,
+      duration: 1 + Math.random() * 3,
+      begin: Math.random() * 2,
     });
-    x += 0;
-    y += 220;
   }
 
-  let newArray = positions.map((p) => {
-    return buildAffirmation(p);
+  let newArray = affirmations.map((affirmation) => {
+    return buildAffirmation(affirmation);
   });
   return newArray;
 }
-
-function createNorthAffirmations(seekerDetails) {
-  const startX = 100 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5);
-  const startY =
-    BUSTED_PIXEL_WIDTH * 0.5 + Math.random() * (BUSTED_PIXEL_WIDTH * 0.5 - 100);
-  let randAffirmation = Math.floor(Math.random() * AFFIRMATIONS.length);
-  const positions = [];
-  let x = startX;
-  let y = startY;
-  for (let level = 0; level < seekerDetails.numAffirmations; level++) {
-    randAffirmation =
-      AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)];
-    positions.push({
-      affirmation: randAffirmation,
-      x: x,
-      y: y,
-      fill: seekerDetails.color,
-    });
-    x += 0;
-    y -= 220;
-  }
-
-  let newArray = positions.map((p) => {
-    return buildAffirmation(p);
-  });
-  return newArray;
-}
-
 function createAffirmationElements(seekerDetails) {
   console.log(seekerDetails);
 
-  return createNorthAffirmations(seekerDetails);
+  return createRandomAffirmations(seekerDetails);
   // if (seekerDetails.path === PATHS.south) {
   //   return createSouthAffirmations(seekerDetails);
   // }
@@ -170,12 +140,12 @@ export function createRandomSeeker() {
   const color = isLight ? "#000000" : "#ffffff";
 
   let seekerDetails = {
-    numAffirmations: Math.floor(Math.random() * MAX_NUM_AFFIRMATIONS),
+    numAffirmations: Math.floor(Math.random() * MAX_NUM_AFFIRMATIONS) + 1,
     background: background,
     color: color,
     path: Math.floor(Math.random() * PATHS.length),
   };
-
+  console.log("seekerDetails", seekerDetails);
   const encodedSeekerData = buildImage(seekerDetails);
   var encodedSeekerSVG =
     "data:image/svg+xml; base64," + window.btoa(encodedSeekerData);
