@@ -59,7 +59,10 @@ const PATHS = {
   random: "random",
 };
 
-const HEIGHTS = [200, 450, 700, 1000, 1300, 1600, 1900, 2200, 2500, 2800];
+const numAffirmationsProbabilities = [1 / 3, 4 / 15, 1 / 5, 2 / 15, 1 / 15];
+const numAffirmationsProbAcc = [5 / 15, 9 / 15, 12 / 15, 14 / 15, 1];
+
+const HEIGHTS = [250, 550, 850, 1150, 1400, 1700, 2000, 2300, 2600, 2900];
 
 const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;
@@ -90,8 +93,6 @@ function createRandomAffirmations(seekerDetails) {
       x: 200 + Math.random() * BUSTED_PIXEL_WIDTH * 0.5,
       y: shuffledHeights[level],
       fill: seekerDetails.color,
-      duration: 1 + Math.random() * 3,
-      begin: Math.random() * 2,
     });
   }
 
@@ -100,26 +101,9 @@ function createRandomAffirmations(seekerDetails) {
   });
   return newArray;
 }
-function createAffirmationElements(seekerDetails) {
-  console.log(seekerDetails);
-
-  return createRandomAffirmations(seekerDetails);
-  // if (seekerDetails.path === PATHS.south) {
-  //   return createSouthAffirmations(seekerDetails);
-  // }
-  // if (seekerDetails.path === PATHS.north) {
-  //   return createNorthAffirmations(seekerDetails);
-  // }
-  //   return createDownAffirmations(seekerDetails);
-  // } else if (seekerDetails.path === "up") {
-  //   return createDownAffirmations(seekerDetails);
-  // } else if (seekerDetails.path === "upAcross") {
-  //   return createDownAffirmations(seekerDetails);
-  // }
-}
 
 function buildImage(seekerDetails) {
-  let affirmationElements = createAffirmationElements(seekerDetails);
+  let affirmationElements = createRandomAffirmations(seekerDetails);
 
   return `<svg  width="300" height="300" viewBox="0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}" xmlns='http://www.w3.org/2000/svg'>
   <rect
@@ -139,13 +123,18 @@ export function createRandomSeeker() {
     : darkColors[Math.floor(Math.random() * darkColors.length)];
   const color = isLight ? "#000000" : "#ffffff";
 
+  let rand = Math.random();
+  let i;
+  for (i = 0; i < numAffirmationsProbAcc.length; i++) {
+    if (rand < numAffirmationsProbAcc[i]) {
+      break;
+    }
+  }
   let seekerDetails = {
-    numAffirmations: Math.floor(Math.random() * MAX_NUM_AFFIRMATIONS) + 1,
+    numAffirmations: i + 1,
     background: background,
     color: color,
-    path: Math.floor(Math.random() * PATHS.length),
   };
-  console.log("seekerDetails", seekerDetails);
   const encodedSeekerData = buildImage(seekerDetails);
   var encodedSeekerSVG =
     "data:image/svg+xml; base64," + window.btoa(encodedSeekerData);

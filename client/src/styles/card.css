@@ -17,12 +17,13 @@
 .card-data {
   margin-top: 10px;
   color: rgb(102, 102, 102);
+  font-family: san serif;
 }
 .item-value {
   color: rgb(61, 64, 91);
   font-weight: 1000;
   margin-left: 10px;
-  font-family: monospace;
+  font-family: serif;
 }
 
 #frame1 {
