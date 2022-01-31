@@ -115,7 +115,7 @@ function App() {
   return (
     <>
       <WhoAmI />
-      <div className="screen">
+      <div className="screen page-wrapper">
         {blockchain.account == "" || blockchain.account == null ? (
           <div className="container column" style={{ height: "100%" }}>
             <div className="spacerMedium" />
