@@ -27,7 +27,10 @@ function App() {
     const dataURI = createRandomSeeker();
     const metadata = { name: name, description: description, image: dataURI };
     //getImageData();
-    mintNFT(blockchain.account, nextSeekerName(), JSON.stringify(metadata));
+    const encodedMetadata =
+      "data:application/json;base64," + window.btoa(JSON.stringify(metadata));
+    console.log("encodedMetadata", encodedMetadata);
+    mintNFT(blockchain.account, nextSeekerName(), encodedMetadata);
   };
 
   const getImageData = () => {
@@ -37,12 +40,15 @@ function App() {
     // 3. convert svg to base64
   };
   const mintNFT = (_account, _name, uri) => {
+    console.log("minting uri", uri);
     setLoading(true);
     blockchain.seekerToken.methods
       .mint(uri)
       .send({
         from: _account,
         gasPrice: "20000000",
+        gas: 6700000,
+        maxPriorityFeePerGas: 2999999987,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {

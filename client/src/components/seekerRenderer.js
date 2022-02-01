@@ -48,7 +48,7 @@ const lightColors = [
   "rgb(222,164,126)",
   "rgb(197,216,109)",
   "rgb(167,190,211)",
-  "rgb(224,202,60)",
+  "rgb(255,222,60)",
   "rgb(115,226,167)",
 ];
 const darkColors = [
@@ -170,21 +170,29 @@ const SeekerRenderer = ({
     return null;
   }
 
-  return (
-    <div className="card columns">
-      <img src={JSON.parse(seeker.uri).image} />
+  try {
+    const uriMeta = JSON.parse(window.atob(seeker.uri.split(",")[1]));
+    console.log("herer", seeker.uri, uriMeta, uriMeta.image);
+    return (
+      <div className="card columns">
+        <img src={uriMeta.image} />
 
-      <div className="container row">
-        <div className="card-data">
-          <p className="textTitle card-data">
-            NAME:
-            <span className="item-value">{JSON.parse(seeker.uri).name}</span>
-          </p>
-          {/* <p className="textDescription card-data">ID: {seeker.id}</p> */}
+        <div className="container row">
+          <div className="card-data">
+            <p className="textTitle card-data">
+              NAME:
+              <span className="item-value">{uriMeta.name}</span>
+            </p>
+            {/* <p className="textDescription card-data">ID: {seeker.id}</p> */}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } catch (err) {
+    console.log(err);
+  }
+
+  return <h1>hello</h1>;
 };
 
 export default SeekerRenderer;
