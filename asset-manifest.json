@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/whosedreamisthis/i-am-dapp/static/css/main.66f955a8.chunk.css",
+    "main.js": "/whosedreamisthis/i-am-dapp/static/js/main.f76f7ddb.chunk.js",
+    "main.js.map": "/whosedreamisthis/i-am-dapp/static/js/main.f76f7ddb.chunk.js.map",
+    "runtime-main.js": "/whosedreamisthis/i-am-dapp/static/js/runtime-main.1516228d.js",
+    "runtime-main.js.map": "/whosedreamisthis/i-am-dapp/static/js/runtime-main.1516228d.js.map",
+    "static/js/2.9e43f696.chunk.js": "/whosedreamisthis/i-am-dapp/static/js/2.9e43f696.chunk.js",
+    "static/js/2.9e43f696.chunk.js.map": "/whosedreamisthis/i-am-dapp/static/js/2.9e43f696.chunk.js.map",
+    "index.html": "/whosedreamisthis/i-am-dapp/index.html",
+    "precache-manifest.3751ac580e02297cc841d64b9402bf3e.js": "/whosedreamisthis/i-am-dapp/precache-manifest.3751ac580e02297cc841d64b9402bf3e.js",
+    "service-worker.js": "/whosedreamisthis/i-am-dapp/service-worker.js",
+    "static/css/main.66f955a8.chunk.css.map": "/whosedreamisthis/i-am-dapp/static/css/main.66f955a8.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1516228d.js",
+    "static/js/2.9e43f696.chunk.js",
+    "static/css/main.66f955a8.chunk.css",
+    "static/js/main.f76f7ddb.chunk.js"
+  ]
+}
