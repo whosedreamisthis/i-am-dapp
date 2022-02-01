@@ -181,6 +181,8 @@ body {
     rgb(21, 122, 110),
     rgb(61, 64, 91)
   );
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .page-wrapper {

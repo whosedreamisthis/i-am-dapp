@@ -123,7 +123,7 @@ function App() {
       <WhoAmI />
       <div className="screen page-wrapper">
         {blockchain.account == "" || blockchain.account == null ? (
-          <div className="container column" style={{ height: "100%" }}>
+          <div className="container column connect">
             <div className="spacerMedium" />
 
             <button
