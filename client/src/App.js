@@ -29,8 +29,8 @@ function App() {
     //getImageData();
     const encodedMetadata =
       "data:application/json;base64," + window.btoa(JSON.stringify(metadata));
-    console.log("encodedMetadata", encodedMetadata);
-    mintNFT(blockchain.account, nextSeekerName(), encodedMetadata);
+    console.log("encodedMetadata", dataURI);
+    mintNFT(blockchain.account, encodedMetadata);
   };
 
   const getImageData = () => {
@@ -39,7 +39,7 @@ function App() {
 
     // 3. convert svg to base64
   };
-  const mintNFT = (_account, _name, uri) => {
+  const mintNFT = (_account, uri) => {
     console.log("minting uri", uri);
     setLoading(true);
     blockchain.seekerToken.methods

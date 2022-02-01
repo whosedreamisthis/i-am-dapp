@@ -84,16 +84,12 @@ const BUSTED_PIXEL_WIDTH = 3000;
 const BUSTED_PIXEL_HEIGHT = 3000;
 const MAX_NUM_AFFIRMATIONS = 5;
 
-function buildAffirmation(p) {
-  return `<text
-  font-size="200"
-  x="${p.x}"
-  y="${p.y}"
-  fill="${p.fill}"
->
+const btoa = function (str) {
+  return Buffer.from(str).toString("base64");
+};
 
-I am ${p.affirmation}
-</text>`;
+function buildAffirmation(p) {
+  return `<text font-size="200" x="${p.x}" y="${p.y}" fill="${p.fill}">I am ${p.affirmation}</text>`;
 }
 
 function createRandomAffirmations(seekerDetails) {
@@ -121,15 +117,7 @@ function createRandomAffirmations(seekerDetails) {
 function buildImage(seekerDetails) {
   let affirmationElements = createRandomAffirmations(seekerDetails);
 
-  return `<svg  width="300" height="300" viewBox="0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}" xmlns='http://www.w3.org/2000/svg'>
-  <rect
-      width="100%"
-      height="100%"
-      fill="${seekerDetails.background}"
-    />
-    ${affirmationElements}
-
-    </svg>`;
+  return `<svg  width="300" height="300" viewBox="0 0 ${BUSTED_PIXEL_WIDTH} ${BUSTED_PIXEL_HEIGHT}" xmlns='http://www.w3.org/2000/svg'> <rect width="100%" height="100%" fill="${seekerDetails.background}"/>${affirmationElements}</svg>`;
 }
 
 export function createRandomSeeker() {
@@ -151,9 +139,8 @@ export function createRandomSeeker() {
     background: background,
     color: color,
   };
-  const encodedSeekerData = buildImage(seekerDetails);
-  var encodedSeekerSVG =
-    "data:image/svg+xml; base64," + window.btoa(encodedSeekerData);
+  const seekerData = buildImage(seekerDetails);
+  var encodedSeekerSVG = "data:image/svg+xml;base64," + btoa(seekerData);
   return encodedSeekerSVG;
 }
 
@@ -172,7 +159,6 @@ const SeekerRenderer = ({
 
   try {
     const uriMeta = JSON.parse(window.atob(seeker.uri.split(",")[1]));
-    console.log("herer", seeker.uri, uriMeta, uriMeta.image);
     return (
       <div className="card columns">
         <img src={uriMeta.image} />
