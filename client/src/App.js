@@ -50,6 +50,7 @@ function App() {
         gas: 6700000,
         maxPriorityFeePerGas: 2999999987,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
+        type: "0x1",
       })
       .once("error", (err) => {
         setLoading(false);

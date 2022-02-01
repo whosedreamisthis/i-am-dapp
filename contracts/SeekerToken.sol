@@ -9,6 +9,7 @@ import "./Base64.sol";
 
 contract SeekerToken is ERC721, Ownable {
     uint256 COUNTER = 0;
+    uint256 public constant MAX_SUPPLY = 100;
     uint256 mintFee = 0.01 ether;
 
     struct Seeker {
@@ -53,16 +54,15 @@ contract SeekerToken is ERC721, Ownable {
     }
 
     // Creation
-    function _createSeeker(string memory _uri) internal {
+    function _createSeeker(string memory _uri) internal {}
+
+    function mint(string memory _uri) public payable {
+        require(msg.value >= mintFee, "Insufficient funds.");
+        require(COUNTER < MAX_SUPPLY);
         _safeMint(msg.sender, COUNTER);
         _setTokenURI(COUNTER, _uri);
         emit NewSeeker(msg.sender, COUNTER, _uri);
         COUNTER++;
-    }
-
-    function mint(string memory _uri) public payable {
-        require(msg.value >= mintFee, "Insufficient funds.");
-        _createSeeker(_uri);
     }
 
     // Getters
