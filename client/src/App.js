@@ -139,21 +139,20 @@ function App() {
             </button>
           </div>
         ) : (
-          <div className="container column ">
-            <div className="spacerMedium" />
-            <div className="mint">
-              <p className="message">{message}</p>
-              <div className="spacerSmall" />
-              <button
-                disabled={loading ? 1 : 0}
-                onClick={(e) => {
-                  e.preventDefault();
-                  startMintingProcess();
-                }}
-              >
-                Mint
-              </button>
-            </div>
+          <div className="container row mint">
+            <p className="message">{message}</p>
+
+            <div className="loader" hidden={loading ? false : true}></div>
+
+            <button
+              disabled={loading ? 1 : 0}
+              onClick={(e) => {
+                e.preventDefault();
+                startMintingProcess();
+              }}
+            >
+              Mint
+            </button>
             <div className="spacerSmall" />
             <div className="container row nft-list">
               {data.allSeekers.map((item) => {
