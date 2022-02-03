@@ -181,13 +181,13 @@ body {
 
 body::after {
   content: "";
-  background: url("../assets/background/lotus.jpg");
-  opacity: 0.25;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)),
+    url("../assets/background/lotus.jpg");
+  opacity: 0.1;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
   z-index: -1;
 
   background-repeat: no-repeat;
@@ -234,4 +234,17 @@ button:active {
 button:disabled,
 button[disabled] {
   background-color: rgb(30, 31, 46);
+}
+
+.overlay {
+  content: "";
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  background-position: center;
 }
