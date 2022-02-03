@@ -1,0 +1,6 @@
+withdraw from owner account. validate after balance
+fail to withdraw from non-owner account
+
+mint with enough funds
+fail to mint with insufficient funds
+fail to mint with exceeding max_supply which we need to somehow reduce from 10,000
