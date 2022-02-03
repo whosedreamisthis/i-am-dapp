@@ -139,11 +139,9 @@ function App() {
             </button>
           </div>
         ) : (
-          <div className="container column ">
-            <div className="spacerMedium" />
+          <div className="container row">
             <div className="mint">
-              <p className="message">{message}</p>
-              <div className="spacerSmall" />
+              <div className="loader" hidden={loading ? false : true} />
               <button
                 disabled={loading ? 1 : 0}
                 onClick={(e) => {
