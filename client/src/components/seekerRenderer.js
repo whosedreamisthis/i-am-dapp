@@ -158,6 +158,7 @@ const SeekerRenderer = ({
   }
 
   try {
+    console.log(seeker.uri);
     const uriMeta = JSON.parse(window.atob(seeker.uri.split(",")[1]));
     return (
       <div className="card columns">

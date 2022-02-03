@@ -4,10 +4,12 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "./Base64.sol";
 
 contract SeekerToken is ERC721, Ownable {
     uint256 COUNTER = 0;
-    uint256 public constant MAX_SUPPLY = 2;
+    uint256 public constant MAX_SUPPLY = 10000;
     uint256 mintFee = 0.01 ether;
 
     struct Seeker {
@@ -17,8 +19,33 @@ contract SeekerToken is ERC721, Ownable {
 
     mapping(uint256 => string) tokenURIs;
 
-    function _setTokenURI(uint256 _tokenId, string memory _tokenURI) internal {
-        tokenURIs[_tokenId] = _tokenURI;
+    function getNextSeekerName(uint256 _tokenID)
+        internal
+        pure
+        returns (string memory)
+    {
+        return string(abi.encodePacked("Seeker #", Strings.toString(_tokenID)));
+    }
+
+    function _setTokenURI(uint256 _tokenId, string memory _dataURI) internal {
+        tokenURIs[_tokenId] = string(
+            abi.encodePacked(
+                "data:application/json;base64,",
+                Base64.encode(
+                    bytes(
+                        abi.encodePacked(
+                            '{"name":"',
+                            getNextSeekerName(_tokenId),
+                            '", "description":"',
+                            "Whether black, white, or any color in between, I am limitless.",
+                            '", "image": "',
+                            _dataURI,
+                            '"}'
+                        )
+                    )
+                )
+            )
+        );
     }
 
     function tokenURI(uint256 _tokenId)
