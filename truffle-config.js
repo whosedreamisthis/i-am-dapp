@@ -1,7 +1,6 @@
 const path = require("path");
+require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-mnemonic =
-  "ridge blue raven win master spray shadow glimpse erode confirm donor humble";
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
@@ -17,7 +16,7 @@ module.exports = {
     rinkeby: {
       provider: function () {
         return new HDWalletProvider(
-          mnemonic,
+          process.env.mnemonic,
           "https://eth-rinkeby.alchemyapi.io/v2/KMa75p_ZcFf0YxiVWlicyyIBXO_O8NLY"
         );
       },

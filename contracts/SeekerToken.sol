@@ -3,13 +3,11 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./Base64.sol";
 
 contract SeekerToken is ERC721, Ownable {
     uint256 COUNTER = 0;
-    uint256 public constant MAX_SUPPLY = 100;
+    uint256 public constant MAX_SUPPLY = 2;
     uint256 mintFee = 0.01 ether;
 
     struct Seeker {
