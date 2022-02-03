@@ -64,7 +64,6 @@ function App() {
 
   const fetchMetadataForNFTs = () => {
     setNFTs([]);
-    setLoading(true);
     data.allSeekers.forEach((nft) => {
       fetch(nft.uri)
         .then((response) => response.json())
@@ -73,9 +72,8 @@ function App() {
             ...prevState,
             { id: nft.id, metaData: metaData },
           ]);
-          setLoading(false);
         })
-        .catch((err) => console.log);
+        .catch((err) => {});
     });
   };
 
@@ -120,6 +118,8 @@ function App() {
     };
   }
 
+  console.log("data", data);
+  console.log("blockchain", blockchain);
   return (
     <>
       <WhoAmI />

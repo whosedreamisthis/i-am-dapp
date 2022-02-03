@@ -205,7 +205,7 @@ div {
 }
 
 button {
-  background-color: rgb(129, 178, 154);
+  background-color: rgb(126, 133, 194);
 
   border: none;
   color: rgb(250, 229, 205);
@@ -218,20 +218,20 @@ button {
   border-radius: 4px;
   min-width: 100px;
   box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.2);
-
+  cursor: pointer;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-button:active {
-  background-color: rgb(85, 122, 103);
+button:hover {
+  background-color: rgb(107, 112, 160);
 }
 button:active {
-  background-color: rgb(104, 179, 142);
+  background-color: rgb(80, 83, 119);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
 button:disabled,
 button[disabled] {
-  background-color: rgb(61, 64, 91);
+  background-color: rgb(30, 31, 46);
 }
