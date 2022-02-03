@@ -16,6 +16,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [NFTs, setNFTs] = useState([]);
   function createRandomNum() {
     return Math.floor(Math.random() * 10 ** 16);
@@ -63,6 +64,7 @@ function App() {
 
   const fetchMetadataForNFTs = () => {
     setNFTs([]);
+    setLoading(true);
     data.allSeekers.forEach((nft) => {
       fetch(nft.uri)
         .then((response) => response.json())
@@ -71,6 +73,7 @@ function App() {
             ...prevState,
             { id: nft.id, metaData: metaData },
           ]);
+          setLoading(false);
         })
         .catch((err) => console.log);
     });
@@ -120,7 +123,7 @@ function App() {
   return (
     <>
       <WhoAmI />
-      <div className="screen page-wrapper">
+      <div className="screen">
         {blockchain.account == "" || blockchain.account == null ? (
           <div className="container column connect">
             <div className="spacerMedium" />
@@ -139,6 +142,8 @@ function App() {
           <div className="container column ">
             <div className="spacerMedium" />
             <div className="mint">
+              <p className="message">{message}</p>
+              <div className="spacerSmall" />
               <button
                 disabled={loading ? 1 : 0}
                 onClick={(e) => {

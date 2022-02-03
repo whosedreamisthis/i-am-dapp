@@ -24,3 +24,13 @@
 .connect {
   background-size: auto;
 }
+
+.message {
+  color: rgb(250, 229, 205);
+  font-size: 1.5rem;
+}
+
+.nft-list {
+  margin-top: 2rem;
+  background-color: transparent;
+}

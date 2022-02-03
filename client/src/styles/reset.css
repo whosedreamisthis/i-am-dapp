@@ -174,14 +174,26 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(
-    -70deg,
-    rgb(159, 126, 105),
-    rgb(21, 122, 110),
-    rgb(61, 64, 91)
-  );
+  /* background: url("../assets/background/lotus.jpg"); */
+  /* background-color: rgba(255, 255, 255, 255); */
+  background-attachment: fixed;
+}
+
+body::after {
+  content: "";
+  background: url("../assets/background/lotus.jpg");
+  opacity: 0.25;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+
   background-repeat: no-repeat;
   background-size: cover;
+  position: fixed;
+  background-position: center;
 }
 
 div {
