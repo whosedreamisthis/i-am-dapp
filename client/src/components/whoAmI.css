@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
-
 .who-am-i {
   margin: 20px;
   color: rgb(44, 46, 58);
-  font: 700 normal 1.5em "Inconsolata";
+  font: 500 normal 1.5em "sans-serif";
   text-shadow: 2px 2px rgba(87, 87, 87, 0.3);
   position: absolute;
+  font-family: sans-serif;
 }
