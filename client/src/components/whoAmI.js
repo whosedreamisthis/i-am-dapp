@@ -12,7 +12,7 @@ const WhoAmI = () => {
     setPosition({ x: x, y: y });
     element.style.top = `${y}px`;
     element.style.left = `${x}px`;
-    element.style.color = `hsl(${h},80%,70%)`;
+    // element.style.color = `hsl(${h},40%,20%)`;
   }
   useEffect(() => {
     if (ref && ref.current) {

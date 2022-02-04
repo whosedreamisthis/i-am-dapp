@@ -30,8 +30,8 @@ function App() {
     //getImageData();
     const encodedMetadata =
       "data:application/json;base64," + window.btoa(JSON.stringify(metadata));
-    console.log("encodedMetadata", dataURI);
-    mintNFT(blockchain.account, encodedMetadata);
+    console.log("dataURI", dataURI);
+    mintNFT(blockchain.account, dataURI);
   };
 
   const getImageData = () => {
@@ -126,7 +126,9 @@ function App() {
       <div className="screen">
         {blockchain.account == "" || blockchain.account == null ? (
           <div className="container column connect">
-            <div className="spacerMedium" />
+            <p className="connectMessage">
+              Ensure metamask is installed, then to the rinkeby testnet.
+            </p>
 
             <button
               className="connect"
