@@ -11,6 +11,8 @@ import SeekerRenderer, {
 import SeekersRenderer from "./components/seekersRenderer";
 import "./styles/card.css";
 import WhoAmI from "./components/whoAmI";
+
+import NewSeeker from "./components/newSeeker";
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -18,6 +20,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [NFTs, setNFTs] = useState([]);
+  const [newSeeker, setNewSeeker] = useState(null);
   function createRandomNum() {
     return Math.floor(Math.random() * 10 ** 16);
   }
@@ -54,33 +57,40 @@ function App() {
         console.log(err);
       })
       .then((receipt) => {
+        const event = new Event("newSeeker");
         setLoading(false);
-        console.log(receipt);
         dispatch(fetchData(blockchain.account));
+
+        // if (receipt.events.NewSeeker.returnValues.length >= 3) {
+        setNewSeeker({
+          name: receipt.events.NewSeeker.returnValues[1],
+          image: receipt.events.NewSeeker.returnValues[2],
+        });
+        //   }
       })
       .catch((err) => {
         console.log("Minting error. Please try again.");
       });
   };
 
-  const fetchMetadataForNFTs = () => {
-    setNFTs([]);
-    data.allSeekers.forEach((nft) => {
-      fetch(nft.uri)
-        .then((response) => response.json())
-        .then((metaData) => {
-          setNFTs((prevState) => [
-            ...prevState,
-            { id: nft.id, metaData: metaData },
-          ]);
-        })
-        .catch((err) => {});
-    });
-  };
+  // const fetchMetadataForNFTs = () => {
+  //   setNFTs([]);
+  //   data.allSeekers.forEach((nft) => {
+  //     fetch(nft.uri)
+  //       .then((response) => response.json())
+  //       .then((metaData) => {
+  //         setNFTs((prevState) => [
+  //           ...prevState,
+  //           { id: nft.id, metaData: metaData },
+  //         ]);
+  //       })
+  //       .catch((err) => {});
+  //   });
+  // };
 
-  useEffect(() => {
-    fetchMetadataForNFTs();
-  }, [data.allSeekers]);
+  // useEffect(() => {
+  //   fetchMetadataForNFTs();
+  // }, [data.allSeekers]);
 
   useEffect(() => {
     if (blockchain.account != "" && blockchain.seekerToken != null) {
@@ -169,33 +179,16 @@ function App() {
             </div>
 
             <div className="spacerSmall" />
-            <SeekersRenderer className="nft"></SeekersRenderer>
-            {/* <div className="container row nft-list">
-              {data.allSeekers.map((item) => {
-                return (
-                  <div className="nft-container">
-                    <SeekerRenderer
-                      seeker={item}
-                      isOwner={isOwner}
-                      loading={loading}
-                    />
-                    <div className="spacerSmall" />
-                  </div>
-                );
-              })}
-            </div> */}
-            {/* <div className="mint">
-              <button
-                disabled={loading ? 1 : 0}
-                onClick={(e) => {
-                  e.preventDefault();
-                  mintNFT(blockchain.account, nextSeekerName());
-                }}
-              >
-                Mint
-              </button>
-            </div>
-            */}
+            {newSeeker == null ? (
+              <SeekersRenderer
+                className="nft"
+                newSeeker={newSeeker}
+              ></SeekersRenderer>
+            ) : (
+              <div className="newSeeker">
+                <NewSeeker seeker={newSeeker} />
+              </div>
+            )}
           </div>
         )}
       </div>

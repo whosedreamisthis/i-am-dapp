@@ -26,12 +26,25 @@ const SeekersRenderer = () => {
       );
     }, 5000);
     setintervalId(newInterval);
+
+    return function cleanup() {
+      clearInterval(newInterval);
+    };
   }, [data]);
   try {
     //console.log(seeker.uri);
 
-    return (
-      <div className="nft">
+    return uriMeta == "" ? (
+      <div></div>
+    ) : (
+      <div
+        className="nft"
+        hidden={
+          !data || !data.allSeekers || data.allSeekers.length == 0
+            ? true
+            : false
+        }
+      >
         <div className="card columns">
           <img className="imageContainer" src={uriMeta.image} />
           <p className="card-data">
