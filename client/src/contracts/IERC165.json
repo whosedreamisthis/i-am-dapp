@@ -317,11 +317,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-<<<<<<< HEAD
-  "updatedAt": "2022-02-03T23:21:45.988Z",
-=======
-  "updatedAt": "2022-02-01T19:57:12.675Z",
->>>>>>> parent of 17d1017 (fix for localhost eip:1559 bug)
+  "updatedAt": "2022-02-04T03:15:25.445Z",
   "devdoc": {
     "details": "Interface of the ERC165 standard, as defined in the https://eips.ethereum.org/EIPS/eip-165[EIP]. Implementers can declare support of contract interfaces, which can then be queried by others ({ERC165Checker}). For an implementation, see {ERC165}.",
     "kind": "dev",

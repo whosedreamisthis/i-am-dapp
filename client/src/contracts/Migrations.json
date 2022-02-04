@@ -1219,43 +1219,15 @@
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
   "networks": {
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0xa04c4B168C1AC407ddC3a67B23574888f04d75f5",
-      "transactionHash": "0xc95fc2764792adad96bb15b83ceb068e80e6416c7d6d8d4d9942d775e6f6e4ad"
-    },
-    "5": {
-      "events": {},
-      "links": {},
-      "address": "0xa14d80C755694a0606D44a00afA3F5139c53ece1",
-      "transactionHash": "0x6d2755fc3c48194a86d7477684c36d902037aedf03627c78466fdd100fc8f12d"
-    },
-    "5777": {
-      "events": {},
-      "links": {},
-      "address": "0xfFFdC74540CE5a0f5c03e89D5f918FcC9A143043",
-      "transactionHash": "0xe956731a8fcf6b5fbaa2834aaa69e222b0b868c9f8d5f61de97a1b1f6d7fcf41"
-    },
     "5778": {
       "events": {},
       "links": {},
-      "address": "0xe55281f8eB8EaC6a72D0d5a0E7143e6498d01aDF",
-      "transactionHash": "0x3f748875759f93c6c20840574e2bba13e35b391bc5b6b94f5e6a467f79031a92"
-    },
-    "1643074481929": {
-      "events": {},
-      "links": {},
-      "address": "0xFC5615dF946deE8F87528d61B49d7c45c587fC20",
-      "transactionHash": "0x149473a6f842149dd416ef1162e6f87013dc7e604ce95175f2a62f618021f9be"
+      "address": "0x4bc0D0Ca5233ce4924D3Ff569f9230482a2Fa698",
+      "transactionHash": "0x3cb24ea325f3b00e079795479e541985bc925637530adb5b6139e6b8b2348ed9"
     }
   },
   "schemaVersion": "3.4.4",
-<<<<<<< HEAD
-  "updatedAt": "2022-02-03T23:23:21.326Z",
-=======
-  "updatedAt": "2022-02-01T19:58:46.487Z",
->>>>>>> parent of 17d1017 (fix for localhost eip:1559 bug)
+  "updatedAt": "2022-02-04T03:15:29.495Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

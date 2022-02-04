@@ -5113,11 +5113,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-<<<<<<< HEAD
-  "updatedAt": "2022-02-03T23:21:45.981Z",
-=======
-  "updatedAt": "2022-02-01T19:57:12.671Z",
->>>>>>> parent of 17d1017 (fix for localhost eip:1559 bug)
+  "updatedAt": "2022-02-04T03:15:25.434Z",
   "devdoc": {
     "details": "String operations.",
     "kind": "dev",
