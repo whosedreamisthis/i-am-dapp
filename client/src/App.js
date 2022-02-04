@@ -34,6 +34,15 @@ function App() {
     mintNFT(blockchain.account, createRandomSeeker());
   };
 
+  const SetUnsuccessfulMintMessage = () => {
+    setMessage(`Mint was unsuccessful.`);
+    setTimeout(() => {
+      setMessage(
+        "Whether black, white, or any color in between, I am limitless."
+      );
+    }, 3000);
+  };
+
   const getImageData = () => {
     var captureEl = document.querySelector("#capture");
     var b64 = "data:image/svg+xml;base64," + window.btoa(captureEl.outerHTML);
@@ -53,6 +62,7 @@ function App() {
       .once("error", (err) => {
         setLoading(false);
         console.log(err);
+        SetUnsuccessfulMintMessage();
       })
       .then((receipt) => {
         const event = new Event("newSeeker");
@@ -62,6 +72,7 @@ function App() {
         setMessage(
           `Congratulations, you are now the owner of Seeker #${receipt.events.NewSeeker.returnValues[1]}`
         );
+
         // if (receipt.events.NewSeeker.returnValues.length >= 3) {
         setNewSeeker({
           name: receipt.events.NewSeeker.returnValues[1],
@@ -71,6 +82,8 @@ function App() {
       })
       .catch((err) => {
         console.log("Minting error. Please try again.");
+        setMessage(`Mint was unsuccessful.`);
+        SetUnsuccessfulMintMessage();
       });
   };
 
