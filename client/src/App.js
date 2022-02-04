@@ -18,22 +18,20 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(
+    "Whether black, white, or any color in between, I am limitless."
+  );
   const [NFTs, setNFTs] = useState([]);
   const [newSeeker, setNewSeeker] = useState(null);
   function createRandomNum() {
     return Math.floor(Math.random() * 10 ** 16);
   }
   const startMintingProcess = () => {
-    const name = nextSeekerName();
-    const description =
-      "Whether black, white, or any color in between, I am limitless.";
-    const dataURI = createRandomSeeker();
-    const metadata = { name: name, description: description, image: dataURI };
+    //const metadata = { name: name, description: description, image: dataURI };
     //getImageData();
-    const encodedMetadata =
-      "data:application/json;base64," + window.btoa(JSON.stringify(metadata));
-    mintNFT(blockchain.account, dataURI);
+    //const encodedMetadata =
+    //"data:application/json;base64," + window.btoa(JSON.stringify(metadata));
+    mintNFT(blockchain.account, createRandomSeeker());
   };
 
   const getImageData = () => {
@@ -61,6 +59,9 @@ function App() {
         setLoading(false);
         dispatch(fetchData(blockchain.account));
 
+        setMessage(
+          `Congratulations, you are now the owner of Seeker #${receipt.events.NewSeeker.returnValues[1]}`
+        );
         // if (receipt.events.NewSeeker.returnValues.length >= 3) {
         setNewSeeker({
           name: receipt.events.NewSeeker.returnValues[1],
@@ -170,10 +171,7 @@ function App() {
                   Mint
                 </button>
               </div>
-              <div className="thesis">
-                Whether black, white, or any color in between, I am limitless.
-              </div>
-              <div className="spacerSmall" />
+              <div className="message">{message}</div>
 
               <div className="line"></div>
             </div>
