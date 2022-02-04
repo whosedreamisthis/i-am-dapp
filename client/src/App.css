@@ -21,6 +21,9 @@
   color: #09d3ac;
 }
 
+.nft {
+}
+
 .connect {
   background-size: auto;
 }
@@ -104,4 +107,12 @@
 
 .imageContainer {
   max-width: 300px;
+}
+
+.nft {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

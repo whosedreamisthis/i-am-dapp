@@ -8,7 +8,7 @@ import "./styles/globalStyles.css";
 import SeekerRenderer, {
   createRandomSeeker,
 } from "./components/seekerRenderer";
-
+import SeekersRenderer from "./components/seekersRenderer";
 import "./styles/card.css";
 import WhoAmI from "./components/whoAmI";
 function App() {
@@ -45,8 +45,8 @@ function App() {
       .mint(uri)
       .send({
         from: _account,
-        gasPrice: "20000000",
-        gas: 6700000,
+        gasPrice: "500000000",
+        gas: 3033152,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {
@@ -57,6 +57,9 @@ function App() {
         setLoading(false);
         console.log(receipt);
         dispatch(fetchData(blockchain.account));
+      })
+      .catch((err) => {
+        console.log("Minting error. Please try again.");
       });
   };
 
@@ -166,7 +169,8 @@ function App() {
             </div>
 
             <div className="spacerSmall" />
-            <div className="container row nft-list">
+            <SeekersRenderer className="nft"></SeekersRenderer>
+            {/* <div className="container row nft-list">
               {data.allSeekers.map((item) => {
                 return (
                   <div className="nft-container">
@@ -179,7 +183,7 @@ function App() {
                   </div>
                 );
               })}
-            </div>
+            </div> */}
             {/* <div className="mint">
               <button
                 disabled={loading ? 1 : 0}
