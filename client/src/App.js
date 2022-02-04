@@ -30,7 +30,6 @@ function App() {
     //getImageData();
     const encodedMetadata =
       "data:application/json;base64," + window.btoa(JSON.stringify(metadata));
-    console.log("dataURI", dataURI);
     mintNFT(blockchain.account, dataURI);
   };
 
@@ -41,7 +40,6 @@ function App() {
     // 3. convert svg to base64
   };
   const mintNFT = (_account, uri) => {
-    console.log("minting uri", uri);
     setLoading(true);
     blockchain.seekerToken.methods
       .mint(uri)
@@ -95,12 +93,7 @@ function App() {
     const filteredSeekers = data.allOwnerSeekers.filter((seekerData) => {
       return seekerData.id === seeker.id;
     });
-    console.log(
-      "does include? ",
-      data.allOwnerSeekers,
-      seeker,
-      filteredSeekers.length == 1
-    );
+
     return filteredSeekers.length == 1;
   }
 

@@ -20,7 +20,7 @@ module.exports = {
         );
       },
       network_id: 4,
-      gas: 4300000, //may be 21000 - 3000000
+      gas: 20000000, //may be 21000 - 3000000
       gasPrice: 20000000000,
     },
     goerli: {

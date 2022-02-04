@@ -163,14 +163,9 @@ const SeekerRenderer = ({
     return (
       <div className="card columns">
         <img className="imageContainer" src={uriMeta.image} />
-        <div className="container row">
-          <div className="card-data">
-            <p className="textTitle card-data">
-              <span className="item-value">{uriMeta.name}</span>
-            </p>
-            {/* <p className="textDescription card-data">ID: {seeker.id}</p> */}
-          </div>
-        </div>
+        <p className="card-data">
+          <span className="item-value">{uriMeta.name}</span>
+        </p>
       </div>
     );
   } catch (err) {

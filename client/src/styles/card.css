@@ -5,7 +5,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin: 10px;
   padding: 0;
 }
 
@@ -20,6 +20,8 @@ img {
 .card-data {
   color: rgb(102, 102, 102);
   font-family: san serif;
+  text-align: center;
+  padding: 20px;
 }
 .item-value {
   color: rgb(61, 64, 91);
@@ -35,5 +37,5 @@ img {
 }
 
 .nft-container {
-  margin: 10px;
+  margin: 1px;
 }
