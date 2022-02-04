@@ -10,7 +10,6 @@ module.exports = {
       host: "127.0.0.1",
       port: 7545,
       network_id: "*",
-      websockets: true,
     },
 
     rinkeby: {
@@ -24,7 +23,6 @@ module.exports = {
       gas: 4300000, //may be 21000 - 3000000
       gasPrice: 20000000000,
     },
-
     goerli: {
       provider: function () {
         return new HDWalletProvider(
@@ -39,7 +37,12 @@ module.exports = {
   compilers: {
     solc: {
       version: "^0.8.0", // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 1500,
+        },
+      }, // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
     },
   },
 };

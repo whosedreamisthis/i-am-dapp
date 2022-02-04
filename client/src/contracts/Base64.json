@@ -7219,7 +7219,11 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
+<<<<<<< HEAD
   "updatedAt": "2022-02-03T23:21:45.991Z",
+=======
+  "updatedAt": "2022-02-01T19:57:12.677Z",
+>>>>>>> parent of 17d1017 (fix for localhost eip:1559 bug)
   "devdoc": {
     "author": "Brecht Devos - <brecht@loopring.org>",
     "kind": "dev",
