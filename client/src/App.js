@@ -55,8 +55,8 @@ function App() {
       .mint(uri)
       .send({
         from: _account,
-        gasPrice: "500000000",
-        gas: 3033152,
+        gasPrice: "100000000",
+        gas: 3133152,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {
@@ -153,6 +153,7 @@ function App() {
             <div className="spacerLarge" />
             <div className="spacerLarge" />
             <button
+              data-message="connect button"
               className="connect"
               onClick={(e) => {
                 e.preventDefault();
@@ -175,6 +176,7 @@ function App() {
               <div className="mint">
                 <div className="loader" hidden={loading ? false : true} />
                 <button
+                  data-message="mint button"
                   disabled={loading ? 1 : 0}
                   onClick={(e) => {
                     e.preventDefault();
@@ -202,6 +204,9 @@ function App() {
             )}
           </div>
         )}
+        <footer className="footer">
+          Only 10,000 of these unique, on-chain NFTs will ever be minted.
+        </footer>
       </div>
     </>
   );

@@ -32,6 +32,13 @@
   color: white;
 }
 
+.footer {
+  color: rgba(255, 255, 255, 0.6);
+  padding-left: 10px;
+  position: absolute;
+  bottom: 10px;
+}
+
 .mint {
   /* height: 200px; */
 }
