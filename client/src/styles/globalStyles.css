@@ -50,6 +50,8 @@
   color: var(--white);
   font-size: 20px;
   font-weight: 500;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 20px;
 }
 
 .textSubTitle {

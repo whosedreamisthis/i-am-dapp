@@ -167,7 +167,6 @@ const SeekerRenderer = ({
         <div className="container row">
           <div className="card-data">
             <p className="textTitle card-data">
-              NAME:
               <span className="item-value">{uriMeta.name}</span>
             </p>
             {/* <p className="textDescription card-data">ID: {seeker.id}</p> */}
