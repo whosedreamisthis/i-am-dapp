@@ -28,6 +28,7 @@
 .connectMessage {
   text-align: center;
   font-size: 1.5rem;
+  padding: 20px;
 }
 .message {
   color: rgb(250, 229, 205);
@@ -57,4 +58,8 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.imageContainer {
+  max-width: 300px;
 }

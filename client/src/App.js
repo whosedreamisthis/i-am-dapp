@@ -127,8 +127,7 @@ function App() {
         {blockchain.account == "" || blockchain.account == null ? (
           <div className="container column connect">
             <p className="connectMessage">
-              Ensure metamask is installed and that you are connected to the
-              rinkeby testnet.
+              Ensure metamask is installed, then to the rinkeby testnet.
             </p>
 
             <button

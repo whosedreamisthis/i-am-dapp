@@ -162,8 +162,7 @@ const SeekerRenderer = ({
     const uriMeta = JSON.parse(window.atob(seeker.uri.split(",")[1]));
     return (
       <div className="card columns">
-        <img src={uriMeta.image} />
-
+        <img className="imageContainer" src={uriMeta.image} />
         <div className="container row">
           <div className="card-data">
             <p className="textTitle card-data">
