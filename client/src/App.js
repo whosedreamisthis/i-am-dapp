@@ -49,9 +49,7 @@ function App() {
         from: _account,
         gasPrice: "20000000",
         gas: 6700000,
-        maxPriorityFeePerGas: 2999999987,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
-        type: "0x1",
       })
       .once("error", (err) => {
         setLoading(false);
@@ -143,20 +141,19 @@ function App() {
             </button>
           </div>
         ) : (
-          <div className="container row mint">
-            <p className="message">{message}</p>
-
-            <div className="loader" hidden={loading ? false : true}></div>
-
-            <button
-              disabled={loading ? 1 : 0}
-              onClick={(e) => {
-                e.preventDefault();
-                startMintingProcess();
-              }}
-            >
-              Mint
-            </button>
+          <div className="container row">
+            <div className="mint">
+              <div className="loader" hidden={loading ? false : true} />
+              <button
+                disabled={loading ? 1 : 0}
+                onClick={(e) => {
+                  e.preventDefault();
+                  startMintingProcess();
+                }}
+              >
+                Mint
+              </button>
+            </div>
             <div className="spacerSmall" />
             <div className="container row nft-list">
               {data.allSeekers.map((item) => {

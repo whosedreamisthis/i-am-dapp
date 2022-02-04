@@ -171,7 +171,6 @@ body {
 html,
 body {
   height: 100%;
-  width: 100%;
   margin: 0;
   padding: 0;
   /* background: url("../assets/background/lotus.jpg"); */
@@ -192,13 +191,10 @@ body::after {
 
   background-repeat: no-repeat;
   background-size: cover;
+  position: fixed;
   background-position: center;
 }
 
-body {
-  overflow-y: scroll;
-  height: 100%;
-}
 div {
   -moz-user-select: none;
   -webkit-user-select: none;
