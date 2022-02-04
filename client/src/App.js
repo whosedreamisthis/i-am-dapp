@@ -118,8 +118,8 @@ function App() {
     };
   }
 
-  console.log("data", data);
-  console.log("blockchain", blockchain);
+  // console.log("data", data);
+  // console.log("blockchain", blockchain);
   return (
     <>
       <WhoAmI />
@@ -150,7 +150,7 @@ function App() {
             </p>
           </div>
         ) : (
-          <div className="container row">
+          <div className="container column">
             <div className="container column header">
               <div className="mint">
                 <div className="loader" hidden={loading ? false : true} />
@@ -164,10 +164,14 @@ function App() {
                   Mint
                 </button>
               </div>
-              <p className="thesis">
+              <div className="thesis">
                 Whether black, white, or any color in between, I am limitless.
-              </p>
+              </div>
+              <div className="spacerSmall" />
+
+              <div className="line"></div>
             </div>
+
             <div className="spacerSmall" />
             <div className="container row nft-list">
               {data.allSeekers.map((item) => {
