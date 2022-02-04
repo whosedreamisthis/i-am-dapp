@@ -126,10 +126,12 @@ function App() {
       <div className="screen">
         {blockchain.account == "" || blockchain.account == null ? (
           <div className="container column connect">
-            <p className="connectMessage">
-              Ensure metamask is installed, then to the rinkeby testnet.
-            </p>
-
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
             <button
               className="connect"
               onClick={(e) => {
@@ -139,20 +141,32 @@ function App() {
             >
               Connect
             </button>
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
+            <div className="spacerLarge" />
+
+            <p className="connectMessage">
+              Ensure metamask is installed, then connect to the rinkeby testnet.
+            </p>
           </div>
         ) : (
           <div className="container row">
-            <div className="mint">
-              <div className="loader" hidden={loading ? false : true} />
-              <button
-                disabled={loading ? 1 : 0}
-                onClick={(e) => {
-                  e.preventDefault();
-                  startMintingProcess();
-                }}
-              >
-                Mint
-              </button>
+            <div className="container column header">
+              <div className="mint">
+                <div className="loader" hidden={loading ? false : true} />
+                <button
+                  disabled={loading ? 1 : 0}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    startMintingProcess();
+                  }}
+                >
+                  Mint
+                </button>
+              </div>
+              <p className="thesis">
+                Whether black, white, or any color in between, I am limitless.
+              </p>
             </div>
             <div className="spacerSmall" />
             <div className="container row nft-list">

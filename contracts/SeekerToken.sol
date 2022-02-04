@@ -83,7 +83,7 @@ contract SeekerToken is ERC721, Ownable {
 
     function mint(string memory _uri) public payable {
         require(msg.value >= mintFee, "Insufficient funds.");
-        require(COUNTER < MAX_SUPPLY);
+        require(COUNTER < MAX_SUPPLY, "Not enought NFTs left.");
         _safeMint(msg.sender, COUNTER);
         _setTokenURI(COUNTER, _uri);
         emit NewSeeker(msg.sender, COUNTER, _uri);

@@ -29,15 +29,42 @@
   text-align: center;
   font-size: 1.5rem;
   padding: 20px;
+  color: white;
+}
+
+.thesis {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 20px;
+  color: white;
+  margin-top: 70px;
 }
 .message {
-  color: rgb(250, 229, 205);
-  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-size: 1.2rem;
+  margin-top: 100px;
 }
 
 .nft-list {
-  margin-top: 2rem;
+  margin-top: 7rem;
   background-color: transparent;
+}
+
+.header {
+  top: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1));
+  height: 130px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  background-position: center;
 }
 
 .loader {
