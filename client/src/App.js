@@ -14,13 +14,14 @@ import WhoAmI from "./components/whoAmI";
 import { randomInt, randomFloat } from "./utils/random";
 import NewSeeker from "./components/newSeeker";
 function App() {
-  const mantra =
+  const TOTAL_NFT_SUPPLY = 10000;
+  const MANTRA =
     "Whether black, white, or anything in between, I am limitless.";
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(mantra);
+  const [message, setMessage] = useState(MANTRA);
   const [NFTs, setNFTs] = useState([]);
   const [newSeeker, setNewSeeker] = useState(null);
   function createRandomNum() {
@@ -37,7 +38,7 @@ function App() {
   const SetUnsuccessfulMintMessage = () => {
     setMessage(`Mint was unsuccessful.`);
     setTimeout(() => {
-      setMessage(mantra);
+      setMessage(MANTRA);
     }, 3000);
   };
 
@@ -170,11 +171,15 @@ function App() {
         ) : (
           <div className="container column">
             <div className="container column header">
-              <div className="mint">
+              <div className="container row mint">
                 <div className="loader" hidden={loading ? false : true} />
                 <button
                   data-message="mint button"
-                  disabled={loading ? 1 : 0}
+                  disabled={
+                    loading || data.allSeekers.length >= TOTAL_NFT_SUPPLY
+                      ? 1
+                      : 0
+                  }
                   onClick={(e) => {
                     e.preventDefault();
                     startMintingProcess();
