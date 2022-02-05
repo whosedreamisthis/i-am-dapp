@@ -7,21 +7,15 @@ const NewSeeker = ({ seeker = null, size = 200 }) => {
     return null;
   }
 
-  try {
-    //console.log(seeker.uri);
-    return (
-      <div className="card columns">
-        <img className="imageContainer" src={seeker.image} />
-        <p className="card-data">
-          <span className="item-value">{`Seeker #${seeker.name}`}</span>
-        </p>
-      </div>
-    );
-  } catch (err) {
-    console.log(err);
-  }
-
-  return <h1>hello</h1>;
+  //console.log(seeker.uri);
+  return (
+    <div className="card columns">
+      <img className="imageContainer" src={seeker.image} />
+      <p className="card-data">
+        <span className="item-value">{`Seeker #${seeker.name}`}</span>
+      </p>
+    </div>
+  );
 };
 
 export default NewSeeker;

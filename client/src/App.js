@@ -55,13 +55,12 @@ function App() {
       .mint(uri)
       .send({
         from: _account,
-        gasPrice: "100000000",
-        gas: 3133152,
+        gasLimit: 700000,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {
         setLoading(false);
-        console.log(err);
+        //console.log(err);
         SetUnsuccessfulMintMessage();
       })
       .then((receipt) => {
