@@ -14,16 +14,16 @@ const WhoAmI = () => {
     element.style.left = `${x}px`;
     // element.style.color = `hsl(${h},40%,20%)`;
   }
-  useEffect(() => {
-    if (ref && ref.current) {
-      ref.current.addEventListener("mouseover", updatePosition, false);
-      return function cleanup() {
-        if (ref && ref.current) {
-          ref.current.removeEventListener("mouseover", updatePosition, false);
-        }
-      };
-    }
-  }, [ref]);
+  // useEffect(() => {
+  //   if (ref && ref.current) {
+  //     ref.current.addEventListener("mouseover", updatePosition, false);
+  //     return function cleanup() {
+  //       if (ref && ref.current) {
+  //         ref.current.removeEventListener("mouseover", updatePosition, false);
+  //       }
+  //     };
+  //   }
+  // }, [ref]);
 
   return (
     <h1
