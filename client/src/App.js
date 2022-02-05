@@ -55,7 +55,7 @@ function App() {
       .mint(uri)
       .send({
         from: _account,
-        gasLimit: 700000,
+        gasLimit: 1000000,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {

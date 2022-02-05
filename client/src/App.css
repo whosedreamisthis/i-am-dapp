@@ -81,7 +81,7 @@
   width: 100%;
   height: 50px;
   border-bottom: 1px solid rgb(255, 255, 255);
-  margin-top: 100px;
+  bottom: 0px;
   left: 0;
   position: absolute;
 }
@@ -113,17 +113,17 @@
 .nft {
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
   z-index: 9;
 }
 
 .newSeeker {
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
   z-index: 10;
 }
