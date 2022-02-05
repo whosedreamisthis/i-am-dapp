@@ -11,7 +11,7 @@ import SeekerRenderer, {
 import SeekersRenderer from "./components/seekersRenderer";
 import "./styles/card.css";
 import WhoAmI from "./components/whoAmI";
-
+import { randomInt, randomFloat } from "./utils/random";
 import NewSeeker from "./components/newSeeker";
 function App() {
   const mantra =
@@ -24,7 +24,7 @@ function App() {
   const [NFTs, setNFTs] = useState([]);
   const [newSeeker, setNewSeeker] = useState(null);
   function createRandomNum() {
-    return Math.floor(Math.random() * 10 ** 16);
+    return randomInt(0, 10 ** 16);
   }
   const startMintingProcess = () => {
     //const metadata = { name: name, description: description, image: dataURI };

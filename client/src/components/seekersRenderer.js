@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SeekerRenderer from "./seekerRenderer";
+import { randomInt } from "../utils/random";
 const SeekersRenderer = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data);
@@ -20,7 +21,7 @@ const SeekersRenderer = () => {
       clearInterval(intervalId);
     }
     const newInterval = setInterval(() => {
-      const rand = Math.floor(Math.random() * data.allSeekers.length);
+      const rand = randomInt(0, data.allSeekers.length);
       setUriMeta(
         JSON.parse(window.atob(data.allSeekers[rand].uri.split(",")[1]))
       );

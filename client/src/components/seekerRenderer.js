@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/card.css";
 import "../styles/globalStyles.css";
-
+import { randomInt, randomFloat } from "../utils/random";
 const QUESTIONS = ["Who am I?", "Whose dream is this?", ""];
 const AFFIRMATIONS = [
   "enough.",
@@ -93,16 +93,16 @@ function buildAffirmation(p) {
 }
 
 function createRandomAffirmations(seekerDetails) {
-  const shuffledAffirmations = AFFIRMATIONS.sort(() => 0.5 - Math.random());
+  const shuffledAffirmations = AFFIRMATIONS.sort(() => 0.5 - randomFloat());
 
-  const shuffledHeights = HEIGHTS.sort(() => 0.5 - Math.random());
+  const shuffledHeights = HEIGHTS.sort(() => 0.5 - randomFloat());
 
   const affirmations = [];
 
   for (let level = 0; level < seekerDetails.numAffirmations; level++) {
     affirmations.push({
       affirmation: shuffledAffirmations[level],
-      x: 200 + Math.random() * BUSTED_PIXEL_WIDTH * 0.5,
+      x: 200 + randomFloat() * BUSTED_PIXEL_WIDTH * 0.5,
       y: shuffledHeights[level],
       fill: seekerDetails.color,
     });
@@ -121,13 +121,13 @@ function buildImage(seekerDetails) {
 }
 
 export function createRandomSeeker() {
-  const isLight = Math.random() > 0.5;
+  const isLight = randomFloat() > 0.5;
   const background = isLight
-    ? lightColors[Math.floor(Math.random() * lightColors.length)]
-    : darkColors[Math.floor(Math.random() * darkColors.length)];
+    ? lightColors[randomInt(0, lightColors.length)]
+    : darkColors[randomInt(0, darkColors.length)];
   const color = isLight ? "#000000" : "#ffffff";
 
-  let rand = Math.random();
+  let rand = randomFloat();
   let i;
   for (i = 0; i < numAffirmationsProbAcc.length; i++) {
     if (rand < numAffirmationsProbAcc[i]) {
