@@ -69,7 +69,7 @@ function App() {
         dispatch(fetchData(blockchain.account));
 
         setMessage(
-          `Congratulations, you are now the owner of Seeker #${receipt.events.NewSeeker.returnValues[1]}`
+          `Congratulations, you own Seeker #${receipt.events.NewSeeker.returnValues[1]}`
         );
 
         // if (receipt.events.NewSeeker.returnValues.length >= 3) {
