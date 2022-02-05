@@ -10,8 +10,7 @@ const WhoAmI = () => {
     const y = 100 + Math.random() * (window.innerHeight - 200);
     const h = Math.random() * 360;
     setPosition({ x: x, y: y });
-    element.style.top = `${y}px`;
-    element.style.left = `${x}px`;
+
     // element.style.color = `hsl(${h},40%,20%)`;
   }
   // useEffect(() => {
@@ -26,12 +25,7 @@ const WhoAmI = () => {
   // }, [ref]);
 
   return (
-    <h1
-      ref={ref}
-      className="who-am-i"
-      id="who-am-i"
-      onMouseOver={updatePosition}
-    >
+    <h1 ref={ref} className="who-am-i" id="who-am-i">
       Who am I?
     </h1>
   );

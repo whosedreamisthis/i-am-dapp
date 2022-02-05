@@ -14,13 +14,13 @@ import WhoAmI from "./components/whoAmI";
 
 import NewSeeker from "./components/newSeeker";
 function App() {
+  const mantra =
+    "Whether black, white, or anything in between, I am limitless.";
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(
-    "Whether black, white, or any color in between, I am limitless."
-  );
+  const [message, setMessage] = useState(mantra);
   const [NFTs, setNFTs] = useState([]);
   const [newSeeker, setNewSeeker] = useState(null);
   function createRandomNum() {
@@ -37,9 +37,7 @@ function App() {
   const SetUnsuccessfulMintMessage = () => {
     setMessage(`Mint was unsuccessful.`);
     setTimeout(() => {
-      setMessage(
-        "Whether black, white, or any color in between, I am limitless."
-      );
+      setMessage(mantra);
     }, 3000);
   };
 
