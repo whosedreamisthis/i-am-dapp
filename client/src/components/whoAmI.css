@@ -1,12 +1,11 @@
 .who-am-i {
   margin: 20px;
-  color: rgb(255, 255, 255);
+  color: rgba(255, 255, 255, 0.39);
   position: absolute;
   font-family: "Courier New", Courier, monospace;
   font-weight: 700;
   font-size: 1.5rem;
-  -webkit-text-stroke: 1px rgb(94, 94, 94);
   bottom: 30px;
-  right: 30px;
+  left: 50%;
   z-index: 20;
 }

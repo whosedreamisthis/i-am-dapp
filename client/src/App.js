@@ -54,7 +54,7 @@ function App() {
       .mint(uri)
       .send({
         from: _account,
-        gasLimit: 1000000,
+        gasLimit: 1100000,
         value: blockchain.web3.utils.toWei("0.01", "ether"),
       })
       .once("error", (err) => {
@@ -63,7 +63,6 @@ function App() {
         SetUnsuccessfulMintMessage();
       })
       .then((receipt) => {
-        const event = new Event("newSeeker");
         setLoading(false);
         dispatch(fetchData(blockchain.account));
 
