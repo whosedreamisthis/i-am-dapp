@@ -9,9 +9,9 @@ import "./Base64.sol";
 
 contract SeekerToken is ERC721, Ownable {
     uint256 COUNTER = 0;
-    uint256 public constant MAX_SUPPLY = 10000;
+    uint256 public constant maxSupply = 10000;
     uint256 mintFee = 0.01 ether;
-
+    bool paused = false;
     struct Seeker {
         uint256 id;
         string uri;
@@ -74,6 +74,10 @@ contract SeekerToken is ERC721, Ownable {
         return randomNum % _mod;
     }
 
+    function setPaused(bool p) public onlyOwner {
+        paused = p;
+    }
+
     function updateMintFee(uint256 newFee) external onlyOwner {
         mintFee = newFee;
     }
@@ -82,8 +86,10 @@ contract SeekerToken is ERC721, Ownable {
     function _createSeeker(string memory _uri) internal {}
 
     function mint(string memory _uri) public payable {
+        require(!paused, "Contract is paused!");
+
         require(msg.value >= mintFee, "Insufficient funds.");
-        require(COUNTER < MAX_SUPPLY, "Not enought NFTs left.");
+        require(COUNTER < maxSupply, "Not enought NFTs left.");
         _safeMint(msg.sender, COUNTER);
         _setTokenURI(COUNTER, _uri);
         emit NewSeeker(msg.sender, COUNTER, _uri);

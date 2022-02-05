@@ -20,8 +20,7 @@ module.exports = {
         );
       },
       network_id: 4,
-      gas: 20000000, //may be 21000 - 3000000
-      gasPrice: 20000000000,
+      gas: 1000000, //may be 21000 - 3000000
     },
     goerli: {
       provider: function () {
