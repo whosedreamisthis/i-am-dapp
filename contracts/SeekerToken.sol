@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.11;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -66,8 +66,8 @@ contract SeekerToken is ERC721, Ownable {
 
     event NewSeeker(address indexed owner, uint256 id, string uri);
 
-    constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
+    constructor(string memory name, string memory symbol)
+        ERC721(name, symbol)
     {}
 
     // Creation
@@ -80,6 +80,15 @@ contract SeekerToken is ERC721, Ownable {
         _safeMint(msg.sender, COUNTER);
         _setTokenURI(COUNTER, _uri);
         emit NewSeeker(msg.sender, COUNTER, _uri);
+        COUNTER++;
+    }
+
+    function gift(address recipient, string memory _uri) public onlyOwner {
+        require(!paused, "Contract is paused!");
+        require(COUNTER < 10000, "Not enought NFTs left.");
+        _safeMint(recipient, COUNTER);
+        _setTokenURI(COUNTER, _uri);
+        emit NewSeeker(recipient, COUNTER, _uri);
         COUNTER++;
     }
 
@@ -119,7 +128,7 @@ contract SeekerToken is ERC721, Ownable {
         paused = p;
     }
 
-    function setCost(uint256 newCost) external onlyOwner {
+    function setCost(uint256 newCost) public onlyOwner {
         cost = newCost;
     }
 

@@ -49,15 +49,12 @@ const lightColors = [
   "rgb(197,216,109)",
   "rgb(167,190,211)",
   "rgb(255,222,60)",
-  "rgb(115,226,167)",
 ];
 const darkColors = [
   "rgb(61, 64, 91)",
-  "rgb(224, 122, 95)",
   "rgb(238,75,106)",
   "rgb(67,124,144)",
   "rgb(159,126,105)",
-  "rgb(21,122,110)",
   "rgb(73,159,104)",
   "rgb(165,70,87)",
 ];
@@ -75,8 +72,14 @@ const PATHS = {
   random: "random",
 };
 
-const numAffirmationsProbabilities = [1 / 3, 4 / 15, 1 / 5, 2 / 15, 1 / 15];
-const numAffirmationsProbAcc = [5 / 15, 9 / 15, 12 / 15, 14 / 15, 1];
+const numAffirmationsProbabilities = [
+  37 / 100,
+  30 / 100,
+  20 / 100,
+  12 / 100,
+  1 / 100,
+];
+const numAffirmationsProbAcc = [37 / 100, 67 / 100, 87 / 100, 99 / 100, 1];
 
 const HEIGHTS = [250, 550, 850, 1150, 1400, 1700, 2000, 2300, 2600, 2900];
 
